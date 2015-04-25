@@ -25,6 +25,7 @@ namespace ReaderV2.Views.Shared
     {
         private string pageType;
         //private Object curViewer;
+        private CtrlBook cb;
 
         public FootMenu()
         {
@@ -33,29 +34,32 @@ namespace ReaderV2.Views.Shared
 
         private void FootLoad(object sender, RoutedEventArgs e)
         {
-        //    if (this.PageType == "TextViewer" || this.PageType == "MangaViewer")
-        //    {
-        //        MakCanv.Loaded += MakLoad;
-
-        //        mChp.Checked += OpenChp;
-
-        //        mPro.Checked += OpenProSet;
-        //        mPro.Unchecked += CloseProSet;
-
-        //        mSet.Checked += OpenSetSet;
-        //        mSet.Unchecked += CloseSetSet;
-
-        //        mMak.Checked += OpenMakSet;
-        //        mMak.Unchecked += CloseMakSet;
-        //    }
-            if(this.PageType == "TextViewer")
+            if (this.PageType == "TextViewer" || this.PageType == "MangaViewer")
             {
-                TextViewer Conts = NavigationService.GetNavigationService(this).Content as TextViewer;
+                MakCanv.Loaded += MakLoad;
+
+                mChp.Checked += OpenChp;
+
+                mPro.Checked += OpenProSet;
+                mPro.Unchecked += CloseProSet;
+
+                mSet.Checked += OpenSetSet;
+                mSet.Unchecked += CloseSetSet;
+
+                mMak.Checked += OpenMakSet;
+                mMak.Unchecked += CloseMakSet;
+
+                //SdrBar.MouseUp += SdrBar_MouseUp;
+                SdrBar.ValueChanged += JumpPage;
             }
-            else if (this.PageType == "MangaViewer")
-            {
-                MangaViewer Conts = (MangaViewer)NavigationService.GetNavigationService(this).Content;
-            }
+            //if(this.PageType == "TextViewer")
+            //{
+            //    TextViewer Conts = NavigationService.GetNavigationService(this).Content as TextViewer;
+            //}
+            //else if (this.PageType == "MangaViewer")
+            //{
+            //    MangaViewer Conts = (MangaViewer)NavigationService.GetNavigationService(this).Content;
+            //}
         }
 
         //书签面板初始化
@@ -75,10 +79,10 @@ namespace ReaderV2.Views.Shared
             }
         }
 
-        private void OpenMenu(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            this.menu.Visibility = Visibility.Visible;
-        }
+        //private void OpenMenu(object sender, System.Windows.Input.MouseEventArgs e)
+        //{
+        //    this.menu.Visibility = Visibility.Visible;
+        //}
 
         private void OpenProSet(object sender, RoutedEventArgs e)
         {
@@ -86,19 +90,21 @@ namespace ReaderV2.Views.Shared
             img.Source = new BitmapImage(new Uri("/ReaderV2;component/Assets/progress1.png", UriKind.Relative));
             this.ProCanv.Visibility = Visibility.Visible;
             
-            if(this.PageType == "TextViewer")
-            {
-                TextViewer Conts = NavigationService.GetNavigationService(this).Content as TextViewer;
-                SdrBar.Maximum = Convert.ToDouble(Conts.myBook.GetItemsCount());
-                cot.Text = "/" + Conts.myBook.GetItemsCount().ToString();
-            }
-            else if (this.PageType == "MangaViewer")
-            {
-                MangaViewer Conts = (MangaViewer)NavigationService.GetNavigationService(this).Content;
-                SdrBar.Maximum = Convert.ToDouble(Conts.myBook.GetItemsCount());
-                cot.Text = "/" + Conts.myBook.GetItemsCount().ToString();
-            }
-
+            //if(this.PageType == "TextViewer")
+            //{
+            //    TextViewer Conts = NavigationService.GetNavigationService(this).Content as TextViewer;
+            //    SdrBar.Maximum = Convert.ToDouble(Conts.myBook.GetItemsCount());
+            //    cot.Text = "/" + Conts.myBook.GetItemsCount().ToString();
+            //}
+            //else if (this.PageType == "MangaViewer")
+            //{
+            //    MangaViewer Conts = (MangaViewer)NavigationService.GetNavigationService(this).Content;
+            //    SdrBar.Maximum = Convert.ToDouble(Conts.myBook.GetItemsCount());
+            //    cot.Text = "/" + Conts.myBook.GetItemsCount().ToString();
+            //}
+            SdrBar.Maximum = Convert.ToDouble(this.Cb.GetItemsCount());
+            SdrBar.Value = Convert.ToDouble(this.Cb.CurrentSheetIndex * 2 + 1);
+            cot.Text = "/" + this.Cb.GetItemsCount().ToString();
         }
 
         private void OpenSetSet(object sender, RoutedEventArgs e)
@@ -200,18 +206,21 @@ namespace ReaderV2.Views.Shared
             }
         }
 
-        //
-        private void SliderValChg(object sender, RoutedPropertyChangedEventArgs<double> e)
+        //slider改变页数
+        private void JumpPage(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            //CtrlBook cb = null ;
             //if (this.PageType == "TextViewer")
             //{
             //    TextViewer tv = NavigationService.GetNavigationService(this).Content as TextViewer;
-            //    tv.myBook.TabIndex
+            //    cb = tv.myBook;
             //}
             //else if (this.PageType == "MangaViewer")
             //{
-            //    curViewer = NavigationService.GetNavigationService(this).Content as MangaViewer;
+            //    MangaViewer mv = NavigationService.GetNavigationService(this).Content as MangaViewer;
+            //    cb = mv.myBook;
             //}
+            this.Cb.CurrentSheetIndex = (Convert.ToInt32(SdrBar.Value)-1)/2;
         }
 
 
@@ -220,8 +229,31 @@ namespace ReaderV2.Views.Shared
         //得到当前页面类型名
         public string PageType
         {
-            get { return NavigationService.GetNavigationService(this).Content.GetType().Name; }
+            get { 
+                if(pageType==null && NavigationService.GetNavigationService(this)!=null)
+                    return NavigationService.GetNavigationService(this).Content.GetType().Name;
+                return pageType;
+            }
             set { pageType = value; }
+        }
+
+        //得到 TextViewer 或 MangaViewer 的 CtrlBook：mybook
+        public CtrlBook Cb
+        {
+            get {
+                if (this.PageType!=null && this.PageType == "TextViewer")
+                {
+                    TextViewer tv = NavigationService.GetNavigationService(this).Content as TextViewer;
+                    cb = tv.myBook;
+                }
+                else if (this.PageType != null && this.PageType == "MangaViewer")
+                {
+                    MangaViewer mv = NavigationService.GetNavigationService(this).Content as MangaViewer;
+                    cb = mv.myBook;
+                }
+                return cb; 
+            }
+            set { cb = value; }
         }
 
         //得到当前页面实例
@@ -242,16 +274,16 @@ namespace ReaderV2.Views.Shared
         //}
 
         // 
-        private void JumpPage(CtrlBook cb, int i)
-        {
-            if (cb.CurrentSheetIndex < cb.GetItemsCount() / 2)
-            {
-                cb.CurrentSheetIndex += i;
-            }
-            else if (cb.CurrentSheetIndex > 0)
-            {
-                cb.CurrentSheetIndex -= i;
-            }
-        }
+        //private void JumpPage(CtrlBook cb, int i)
+        //{
+        //    if (i>0 && cb.CurrentSheetIndex + 1 <= (cb.GetItemsCount() - 1) / 2)
+        //    {
+        //        cb.CurrentSheetIndex += i;
+        //    }
+        //    else if (i<0 && cb.CurrentSheetIndex > 0)
+        //    {
+        //        cb.CurrentSheetIndex -= i;
+        //    }
+        //}
     }
 }

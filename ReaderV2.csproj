@@ -74,9 +74,6 @@
     <Compile Include="Views\Shared\FootMenu.xaml.cs">
       <DependentUpon>FootMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Mark.xaml.cs">
-      <DependentUpon>Mark.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Shared\TopMenu.xaml.cs">
       <DependentUpon>TopMenu.xaml</DependentUpon>
     </Compile>
@@ -89,6 +86,9 @@
     </Compile>
     <Compile Include="Views\Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mark.xaml.cs">
+      <DependentUpon>Mark.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Chapter.xaml">
       <SubType>Designer</SubType>
@@ -118,10 +118,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Mark.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Shared\TopMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,6 +133,10 @@
     <Page Include="Views\Window1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Mark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

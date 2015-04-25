@@ -7,6 +7,7 @@
              xmlns:my="clr-namespace:ReaderV2.Views.Shared"
              xmlns:controls="clr-namespace:WpfFlipPageControl;assembly=WpfFlipPageControl"
              mc:Ignorable="d"
+             Loaded="MangaLoad"
 	         Width="908" Height="852">
     <Page.Resources>
         <Style x:Key="MenuButtonStyle" BasedOn="{x:Null}" TargetType="{x:Type Button}">

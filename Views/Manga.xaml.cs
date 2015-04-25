@@ -78,7 +78,8 @@ namespace ReaderV2.Views
 
         private void NextClick(object sender, RoutedEventArgs args)
         {
-            if (this.myBook.CurrentSheetIndex < this.myBook.GetItemsCount() / 2)
+            //if (this.myBook.CurrentSheetIndex < this.myBook.GetItemsCount() / 2)
+            if (this.myBook.CurrentSheetIndex + 1 <= (this.myBook.GetItemsCount() - 1) / 2)
                 this.myBook.CurrentSheetIndex++;
         }
 
