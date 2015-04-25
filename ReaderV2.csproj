@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)'==''">Debug</Configuration>
+    <DefaultClrNameSpace>ReaderV2</DefaultClrNameSpace>
+    <AssemblyName>ReaderV2</AssemblyName>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <AlwaysCompileMarkupFilesInSeparateDomain>false</AlwaysCompileMarkupFilesInSeparateDomain>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ReaderV2</RootNamespace>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ProjectGuid>{C8FD479C-8AC5-46D7-98D8-CAF022D89102}</ProjectGuid>
+    <Win32Resource>Resources.res</Win32Resource>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>http://localhost/ReaderV2/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="Helper\DbHelper.cs" />
+    <Compile Include="Helper\Encrypt.cs" />
+    <Compile Include="Helper\Switch.cs" />
+    <Compile Include="Models\Chapter.cs" />
+    <Compile Include="Models\Manga.cs" />
+    <Compile Include="Models\Text.cs" />
+    <Compile Include="Models\Volume.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Index.cs" />
+    <Compile Include="Services\Shared\Manga.cs" />
+    <Compile Include="Services\Volume.cs" />
+    <Compile Include="Views\Chapter.xaml.cs">
+      <DependentUpon>Chapter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cover.xaml.cs">
+      <DependentUpon>Cover.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Desk.xaml.cs">
+      <DependentUpon>Desk.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Index.xaml.cs">
+      <DependentUpon>Index.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Manga.xaml.cs">
+      <DependentUpon>Manga.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Shared\FootMenu.xaml.cs">
+      <DependentUpon>FootMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mark.xaml.cs">
+      <DependentUpon>Mark.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\TopMenu.xaml.cs">
+      <DependentUpon>TopMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Text.xaml.cs">
+      <DependentUpon>Text.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Volume.xaml.cs">
+      <DependentUpon>Volume.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\Chapter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Cover.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Desk.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Index.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Manga.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Shared\FootMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Mark.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Shared\TopMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Text.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Volume.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.96.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Helper\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Helper\ImageCollection.cs" />
+    <Reference Include="WpfFlipPageControl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\WpfFlipPageControl.dll</HintPath>
+    </Reference>
+    <Resource Include="Assets\bg_progress.png" />
+    <Resource Include="Assets\shadowPageLeft.png" />
+    <Resource Include="Assets\shadowPageRight.png" />
+    <Resource Include="Assets\splash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\01p46.jpg" />
+    <!-- <Content Include="Sample_Photos\page01.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample_Photos\page02.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample_Photos\page03.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample_Photos\page04.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample_Photos\page05.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample_Photos\page06.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample_Photos\page07.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample_Photos\page08.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample_Photos\page09.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample_Photos\page10.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample_Photos\page11.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample_Photos\page12.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample_Photos\page13.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample_Photos\page14.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample_Photos\page15.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content> -->
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App_Data\ShenJie.db" />
+    <None Include="DB\ShenJie.db" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\bg_12.png" />
+    <Resource Include="Assets\bg_catalog.png" />
+    <Resource Include="Assets\catalog1.png" />
+    <Resource Include="Assets\Cover1_sgyy.png" />
+    <Resource Include="Assets\Cover1_xyj.png" />
+    <Resource Include="Assets\Cover2_sgyy.png" />
+    <Resource Include="Assets\Cover2_xyj.png" />
+    <Resource Include="Assets\mark1.png" />
+    <Resource Include="Assets\progress1.png" />
+    <Resource Include="Assets\return1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\wiki1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\BigTitle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Cover1_hlm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Cover1_sh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\catalog0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\mark0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\netarea0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\progress0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\setup0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\wiki0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\return0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\bg_setup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\anchor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\outpro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\selected0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\selected1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\setup1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\bg_Chapter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Cover.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\HB_Chp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\BK_Chp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\XS_Chp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\amark0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\amark1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\bg_mark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\bg_set.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Jilu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\jilu0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\jilu1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Mark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\col1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\col2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\col3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Mak.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\procl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\procr.png" />
+  </ItemGroup>
+</Project>

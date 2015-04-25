@@ -1,0 +1,12 @@
+// -------------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All Rights Reserved.
+// -------------------------------------------------------------------
+
+//Hard-code this value from winuser.h so we don't take the dependency
+//#include "winuser.h"
+#define RT_MANIFEST 24
+#define IDR_MAINFRAME 32512
+
+1 RT_MANIFEST "PhotoBook.exe.manifest"
+
+IDR_MAINFRAME ICON "Application.ico"

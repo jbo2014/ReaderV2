@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="ReaderV2.Views.Shared.TopMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Loaded="TopLoaded"
+             d:DesignHeight="50" d:DesignWidth="908">
+
+    <UserControl.Resources>
+        <Style x:Key="MenuButtonStyle" BasedOn="{x:Null}" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle Opacity="0" Fill="#66FFFFFF" Stroke="{x:Null}" StrokeThickness="0.5" HorizontalAlignment="Stretch" Margin="0,2,2,2" x:Name="rectangle" VerticalAlignment="Stretch"/>
+                            <!--<Path Fill="{x:Null}" Stretch="Fill" Stroke="#7FFFFFFF" StrokeThickness="1" HorizontalAlignment="Right" Margin="0,4,0.5,4" Width="1" Height="17" Grid.RowSpan="1" Data="M-87.28,4 L-87.28,17"/>-->
+                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="10,0,10,0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" TextElement.Foreground="#FFFFFFFF" RecognizesAccessKey="True"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" TargetName="rectangle" Value="0.5"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" TargetName="rectangle" Value="1"/>
+                                <Setter Property="Fill" TargetName="rectangle" Value="#FF000000"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Opacity="1" x:Name="TopMenus" VerticalAlignment="Top" Canvas.Left="0" Canvas.Top="0">
+        <Rectangle Fill="#FF413836" Stroke="{x:Null}" StrokeThickness="0.5" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="50"  x:Name="menuBar"/>
+        <DockPanel LastChildFill="True" Width="908" Height="50">
+            <Button Style="{DynamicResource MenuButtonStyle}" Width="140" DockPanel.Dock="Left" PreviewMouseDown="BackPrePage">
+                <Button.Content>
+                    <Image Width="33" Visibility="Visible" Source="..\..\Assets\return0.png" HorizontalAlignment="left" Height="39"/>
+                </Button.Content>
+            </Button>
+            <Button Style="{DynamicResource MenuButtonStyle}" Width="140" DockPanel.Dock="Right" PreviewMouseDown="Fly2Wiki">
+                <Button.Content>
+                    <Image Width="33" Visibility="Visible" Source="..\..\Assets\wiki0.png" HorizontalAlignment="Right" Height="39"/>
+                </Button.Content>
+            </Button>
+            <!--<Image Width="535" Visibility="Visible" Source="..\..\Assets\BigTitle.png" HorizontalAlignment="Center" Height="39" PreviewMouseDown="RemoveWin"/>-->
+            <!--<TextBlock x:Name="Title" Text="abcdefdsfsdfdsf" Width="535" Height="39" Visibility="Visible" HorizontalAlignment="Center" PreviewMouseDown="RemoveWin" Foreground="White"></TextBlock>-->
+
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Microsoft YaHei" PreviewMouseDown="RemoveWin">
+                <Run x:Name="Title" Foreground="White" FontWeight="Normal" FontSize="27" Text="神界漫画《四大名著》数字全集"/>
+            </TextBlock>
+        </DockPanel>
+    </Grid>
+</UserControl>

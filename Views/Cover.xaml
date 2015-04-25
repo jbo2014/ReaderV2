@@ -1,0 +1,21 @@
+﻿<Page x:Class="ReaderV2.Views.CoverViewer"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ReaderV2"
+      xmlns:my="clr-namespace:ReaderV2.Views.Shared"
+      mc:Ignorable="d" 
+      d:DesignHeight="852" d:DesignWidth="908"
+	Title="Cover">
+
+    <Grid Focusable="False" x:Name="root">
+        <my:TopMenu x:Name="Top" />
+        <Canvas Margin="0,0,0,0" x:Name="table" Canvas.Left="0" Canvas.Top="0"/>
+        <WrapPanel x:Name="Books" Margin="30,54,30,65" Orientation="Horizontal" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Loaded="ImgLoaded">
+            <Image x:Name="covImg" Visibility="Visible" MouseLeftButtonDown="Url2Catalog" Width="414"/>
+            <Image Visibility="Visible" Source="/ReaderV2;component/Assets/Cover.jpg" MouseLeftButtonDown="Url2Catalog" Width="414"/>
+        </WrapPanel>
+        <my:FootMenu x:Name="Foot" />
+    </Grid>
+</Page>

@@ -1,0 +1,18 @@
+﻿<NavigationWindow x:Class="ReaderV2.Views.Window1Viewer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ReaderV2.Views="clr-namespace:ReaderV2.Views"
+        xml:lang="en-US"
+	    x:Name="Window1"
+        Title="ReaderV2" 
+        Width="908" Height="852" MaxWidth="908" MaxHeight="852" MinWidth="908" MinHeight="852" 
+        StateChanged="OnWindowStateChanged"
+        WindowStartupLocation="CenterScreen"
+        ShowsNavigationUI="False" Source="Index.xaml" Navigating="NavigationWindow_Navigating" ResizeMode="NoResize" FontSize="11" FontFamily="Tahoma" BorderThickness="0,0,0,0"
+    WindowState="Normal" WindowStyle="None" MouseUp="CloseFootMenu"
+    Background="#FFEEEBE5">
+    <!--<NavigationWindow.Background>
+        <ImageBrush ImageSource="/ReaderV2;component/Assets/bg_12.png"/>
+    </NavigationWindow.Background>-->
+    <!--MouseLeftButtonDown="RemoveWin">-->
+</NavigationWindow>
