@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Configuration;
 
 using ReaderV2.Helper;
+using WpfFlipPageControl;
 
 namespace ReaderV2.Views.Shared
 {
@@ -23,6 +24,7 @@ namespace ReaderV2.Views.Shared
     public partial class FootMenu : UserControl
     {
         private string pageType;
+        //private Object curViewer;
 
         public FootMenu()
         {
@@ -64,7 +66,6 @@ namespace ReaderV2.Views.Shared
             if (this.PageType == "TextViewer") 
             {
                 TextViewer tv = (TextViewer)NavigationService.GetNavigationService(this).Content;
-                MessageBox.Show(tv.myBook.CurrentSheetIndex.ToString());
             }
             //dv.Books.Children.Remove(dv.Books.Children[0]);
 
@@ -84,7 +85,6 @@ namespace ReaderV2.Views.Shared
             Image img = mPro.Content as Image;
             img.Source = new BitmapImage(new Uri("/ReaderV2;component/Assets/progress1.png", UriKind.Relative));
             this.ProCanv.Visibility = Visibility.Visible;
-
             
             if(this.PageType == "TextViewer")
             {
@@ -174,11 +174,18 @@ namespace ReaderV2.Views.Shared
 
 
         /********************************************* 进度条操作 ****************************************/
-        //上一章
-        private void LastChp(object sender, MouseButtonEventArgs e)
+        //上一章 v="-1"; 下一章v="+1"
+        public void JumpChp(object sender, MouseButtonEventArgs e)
         {
+            string v = "+1";
+            TextBlock tb = sender as TextBlock;
+            if (tb.Uid == "lChp")
+            {
+                v = "-1";
+            }
+
             string chp = Application.Current.Properties["Chp"].ToString();
-            string sql = "select b.id from Chapter as a INNER JOIN Chapter as b on a.VolID=b.VolID and a.No-1=b.No where a.ID=" + chp;
+            string sql = "select b.id from Chapter as a INNER JOIN Chapter as b on a.VolID=b.VolID and a.No" + v + "=b.No where a.ID=" + chp;
             Application.Current.Properties["Chp"] = DBHelper.GetSingle(sql).ToString();
 
             if (Application.Current.Properties["Type"].ToString() == "1" || Application.Current.Properties["Type"].ToString() == "3")  //漫画、绘本
@@ -189,18 +196,62 @@ namespace ReaderV2.Views.Shared
             else if (Application.Current.Properties["Type"].ToString() == "2" || Application.Current.Properties["Type"].ToString() == "4")  //小说、百科
             {
                 App.DoEvents();
-                //NavigationService.GetNavigationService(this).Navigate(new Uri("Views/Text.xaml", UriKind.Relative));
                 NavigationService.GetNavigationService(this).Content = new TextViewer();
             }
         }
 
+        //
+        private void SliderValChg(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            //if (this.PageType == "TextViewer")
+            //{
+            //    TextViewer tv = NavigationService.GetNavigationService(this).Content as TextViewer;
+            //    tv.myBook.TabIndex
+            //}
+            //else if (this.PageType == "MangaViewer")
+            //{
+            //    curViewer = NavigationService.GetNavigationService(this).Content as MangaViewer;
+            //}
+        }
+
+
 
         /********************************************* 辅助函数 ******************************************/
-        //得到当前页面
+        //得到当前页面类型名
         public string PageType
         {
             get { return NavigationService.GetNavigationService(this).Content.GetType().Name; }
             set { pageType = value; }
+        }
+
+        //得到当前页面实例
+        //public Object CurViewer
+        //{
+        //    get {
+        //        if (this.PageType == "TextViewer") 
+        //        {
+        //            curViewer = NavigationService.GetNavigationService(this).Content as TextViewer;
+        //        }
+        //        else if (this.PageType == "MangaViewer")
+        //        {
+        //            curViewer = NavigationService.GetNavigationService(this).Content as MangaViewer;
+        //        }
+        //        return curViewer; 
+        //    }
+        //    set { curViewer = value; }
+        //}
+
+        // 
+        private void JumpPage(CtrlBook cb, int i)
+        {
+            if (cb.CurrentSheetIndex < cb.GetItemsCount() / 2)
+            {
+                cb.CurrentSheetIndex += i;
+            }
+            else if (cb.CurrentSheetIndex > 0)
+            {
+                cb.CurrentSheetIndex -= i;
+            }
         }
     }
 }

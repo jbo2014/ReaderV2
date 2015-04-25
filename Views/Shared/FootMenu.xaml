@@ -196,21 +196,19 @@
                     <Canvas.Background>
                         <ImageBrush ImageSource="/ReaderV2;component/Assets/bg_progress.png" Stretch="Uniform"/>
                     </Canvas.Background>
-                    <Rectangle Stroke="{x:Null}" Height="25" Width="66" Canvas.Left="25" Canvas.Top="13" MouseLeftButtonDown="LastChp">
-                        <Rectangle.Fill>
+                    <TextBlock Uid="lChp" Canvas.Left="30" Canvas.Top="13" Height="25" Width="66" Text="上一章" TextAlignment="Center" Foreground="White" FontSize="14" MouseLeftButtonDown="JumpChp">
+                        <TextBlock.Background>
                             <ImageBrush ImageSource="/ReaderV2;component/Assets/bg_Chapter.png"/>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                    <TextBlock Canvas.Left="30" Canvas.Top="17" Height="24" Width="55" Text="上一章" TextAlignment="Center" Foreground="White"></TextBlock>
+                        </TextBlock.Background>
+                    </TextBlock>
                     <TextBlock x:Name="per" Canvas.Left="195" Canvas.Top="13" Height="24" Width="54" Text="{Binding ElementName=SdrBar,Path=Value}" FontSize="15" TextAlignment="Center" Foreground="White"/>
                     <TextBlock x:Name="cot" Canvas.Left="215" Canvas.Top="13" Height="24" Width="54" FontSize="15" TextAlignment="Center" Foreground="White"/>
-                    <Rectangle Stroke="{x:Null}" Height="25" Width="66" Canvas.Right="25" Canvas.Top="13" Canvas.Left="336">
-                        <Rectangle.Fill>
+                    <TextBlock Uid="rChp" Canvas.Right="30" Canvas.Top="13" Height="25" Width="66" Text="下一章" TextAlignment="Center" Foreground="White" FontSize="14" MouseLeftButtonDown="JumpChp">
+                        <TextBlock.Background>
                             <ImageBrush ImageSource="/ReaderV2;component/Assets/bg_Chapter.png"/>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                    <TextBlock Canvas.Top="17" Height="24" Width="54" Text="下一章" TextAlignment="Center" Foreground="White" Canvas.Right="25" Canvas.Left="342"></TextBlock>
-                    <Slider x:Name="SdrBar" Canvas.Left="25" Canvas.Top="60" Width="330" MouseUp="SdrChange" IsSnapToTickEnabled="True" TickFrequency="1" Style="{StaticResource SliderStyle}" Minimum="1" Background="Transparent" BorderThickness="0" Height="16"></Slider>
+                        </TextBlock.Background>
+                    </TextBlock>
+                    <Slider x:Name="SdrBar" Canvas.Left="31" Canvas.Top="60" Width="320" MouseUp="SdrChange" IsSnapToTickEnabled="True" TickFrequency="1" Style="{StaticResource SliderStyle}" Minimum="1" Background="Transparent" BorderThickness="0" Height="16" ValueChanged="SliderValChg"></Slider>
                     <Image Source="/ReaderV2;component/Assets/outpro.png" Canvas.Left="377" Canvas.Top="55" Height="26" Width="25" />
                 </Canvas>
                 <Canvas x:Name="SetCanv" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Width="273" Height="195" Canvas.Left="323" Canvas.Bottom="65">
