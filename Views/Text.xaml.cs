@@ -68,7 +68,7 @@ namespace ReaderV2.Views
             
             for (int i = 1; i <= txtArray.Count; i++ )
             {
-                volList.Add(new Text() { No = i, Contents = txtArray[i-1], BgColor = bgColor, FontSize = fSize });
+                volList.Add(new Text() { No = i, Contents = txtArray[i-1], BgColor = "#"+bgColor, FontSize = fSize });
             }
             this.myBook.ItemsSource = volList;
         }

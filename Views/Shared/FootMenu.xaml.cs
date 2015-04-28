@@ -43,35 +43,40 @@ namespace ReaderV2.Views.Shared
                 mPro.Checked += OpenProSet;
                 mPro.Unchecked += CloseProSet;
 
-                mSet.Checked += OpenSetSet;
-                mSet.Unchecked += CloseSetSet;
-
                 mMak.Checked += OpenMakSet;
                 mMak.Unchecked += CloseMakSet;
 
                 //SdrBar.MouseUp += SdrBar_MouseUp;
                 SdrBar.ValueChanged += JumpPage;
             }
-            //if(this.PageType == "TextViewer")
-            //{
-            //    TextViewer Conts = NavigationService.GetNavigationService(this).Content as TextViewer;
-            //}
-            //else if (this.PageType == "MangaViewer")
-            //{
-            //    MangaViewer Conts = (MangaViewer)NavigationService.GetNavigationService(this).Content;
-            //}
+            if (this.PageType == "TextViewer")
+            {
+                mSet.Checked += OpenSetSet;
+                mSet.Unchecked += CloseSetSet;
+
+                Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                string turn = cfa.AppSettings.Settings["isTurnPage"].Value;
+                string size = cfa.AppSettings.Settings["fontSize"].Value;
+                string theme = cfa.AppSettings.Settings["theme"].Value;
+                RadioButton rbp = SetCanv.FindName("p" + turn) as RadioButton;
+                rbp.RemoveHandler(RadioButton.CheckedEvent, new RoutedEventHandler(ChangSet));
+                rbp.IsChecked = true;
+                RadioButton rbs = SetCanv.FindName("f" + size) as RadioButton;
+                rbs.RemoveHandler(RadioButton.CheckedEvent, new RoutedEventHandler(ChangSet));
+                rbs.IsChecked = true;
+                RadioButton rbt = SetCanv.FindName("t" + theme) as RadioButton;
+                rbt.RemoveHandler(RadioButton.CheckedEvent, new RoutedEventHandler(ChangSet));
+                rbt.IsChecked = true;
+            }
         }
 
         //书签面板初始化
         private void MakLoad(object sender, RoutedEventArgs e)
         {
-            //DeskViewer dv = (DeskViewer)NavigationService.GetNavigationService(this).Content;
-            Object obj = null;
             if (this.PageType == "TextViewer") 
             {
                 TextViewer tv = (TextViewer)NavigationService.GetNavigationService(this).Content;
             }
-            //dv.Books.Children.Remove(dv.Books.Children[0]);
 
             if (this.PageType == "MarkViewer") 
             {
@@ -221,6 +226,27 @@ namespace ReaderV2.Views.Shared
             //    cb = mv.myBook;
             //}
             this.Cb.CurrentSheetIndex = (Convert.ToInt32(SdrBar.Value)-1)/2;
+        }
+
+
+
+        /********************************************* 设置项操作 ****************************************/
+        private void ChangSet(object sender, RoutedEventArgs e)
+        {
+            RadioButton rb = e.OriginalSource as RadioButton;
+            if (this.PageType == "TextViewer")
+            {
+                Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                cfa.AppSettings.Settings[rb.GroupName].Value = rb.Name.Substring(1);
+                cfa.Save(ConfigurationSaveMode.Modified);　　//这个模式的话是将修改的属性写出到配置文件，即使值和继承值相同。
+                ConfigurationManager.RefreshSection("appSettings");
+
+                NavigationService.GetNavigationService(this).Content = new TextViewer();
+            }
+            else 
+            {
+                MessageBox.Show("该界面下不允许执行此操作");
+            }
         }
 
 
