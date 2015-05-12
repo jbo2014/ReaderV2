@@ -54,9 +54,12 @@
                         <DataTemplate>
                             <Border BorderThickness="1" BorderBrush="Gray">
                                 <!--<ContentControl Content="{Binding .}" />-->
-                                <Label MaxWidth="550" Background="{Binding Path=BgColor}">
-                                    <TextBlock Uid="{Binding Path=No}" TextWrapping="Wrap" FontSize="{Binding Path=FontSize}" FontStretch="UltraExpanded" Text="{Binding Path=Contents}"/>
-                                </Label>
+                                <Canvas>
+                                    <Label MaxWidth="550" Background="{Binding Path=BgColor}">
+                                        <TextBlock Uid="{Binding Path=No}" TextWrapping="Wrap" FontSize="{Binding Path=FontSize}" FontStretch="UltraExpanded" Text="{Binding Path=Contents}"/>
+                                    </Label>
+                                    <Image Visibility="{Binding Path=ShowMark}" Source="/ReaderV2;component/Assets/Mak.png" Canvas.Left="30" Canvas.Top="0"/>
+                                </Canvas>
                             </Border>
                         </DataTemplate>
                     </controls:CtrlBook.ItemTemplate>

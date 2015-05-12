@@ -56,14 +56,6 @@ namespace ReaderV2.Views.Shared
 
         private void BackPrePage(object sender, MouseButtonEventArgs e)
         {
-            //if (NavigationService.GetNavigationService(this).CanGoBack)// && this.Parent.InheritanceParent.GetType().Name!="Index")
-            //{
-            //    NavigationService.GetNavigationService(this).GoBack();
-            //}
-            //else 
-            //{
-            //    Application.Current.MainWindow.Close();
-            //}
             if (NavigationService.GetNavigationService(this).Content.GetType().Name == "VolumeViewer")
             {
                 NavigationService.GetNavigationService(this).Navigate(new Uri("/Views/Index.xaml", UriKind.Relative));
@@ -71,10 +63,13 @@ namespace ReaderV2.Views.Shared
             else if (NavigationService.GetNavigationService(this).Content.GetType().Name == "IndexViewer" && (Application.Current.Properties["Type"] != null && Application.Current.Properties["Type"].ToString() == "4"))
             {
                 Application.Current.Properties["Type"] = null;
-                NavigationService.GetNavigationService(this).Navigate(new Uri("/Views/Index.xaml", UriKind.Relative));
+                //NavigationService.GetNavigationService(this).Navigate(new Uri("/Views/Index.xaml", UriKind.Relative));
+                App.DoEvents();
+                NavigationService.GetNavigationService(this).Content = new IndexViewer();
             }
             else if (NavigationService.GetNavigationService(this).Content.GetType().Name == "CoverViewer")
             {
+                Application.Current.Properties["Vol"] = null;
                 NavigationService.GetNavigationService(this).Navigate(new Uri("/Views/Volume.xaml", UriKind.Relative));
             }
             else if (NavigationService.GetNavigationService(this).Content.GetType().Name == "ChapterViewer")
@@ -84,7 +79,14 @@ namespace ReaderV2.Views.Shared
             //else if (NavigationService.GetNavigationService(this).Content.GetType().Name == "DeskViewer")
             else if (NavigationService.GetNavigationService(this).Content.GetType().Name == "TextViewer" || NavigationService.GetNavigationService(this).Content.GetType().Name == "MangaViewer")
             {
+                Application.Current.Properties["Chp"] = null;
+                if(Application.Current.Properties["Page"]!=null)
+                    Application.Current.Properties["Page"] = null;
                 NavigationService.GetNavigationService(this).Navigate(new Uri("/Views/Chapter.xaml", UriKind.Relative));
+            }
+            else if (NavigationService.GetNavigationService(this).Content.GetType().Name == "MarkViewer")
+            {
+                NavigationService.GetNavigationService(this).GoBack();
             }
             else 
             {

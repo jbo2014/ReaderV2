@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
 using System.Configuration;
+using System.Collections.ObjectModel;
 
 using ReaderV2.Models;
 using ReaderV2.Helper;
@@ -46,50 +47,63 @@ namespace ReaderV2.Views
 
         private void MarkLoad(object sender, RoutedEventArgs e)
         {
-            string bgColor = ConfigurationManager.AppSettings["theme"];
-            string fSize = ConfigurationManager.AppSettings["fontSize"];
-            string chpID = Application.Current.Properties["Chp"].ToString();
-            List<Text> volList = new List<Text>();
-            int maxTxt = 300;
-            if(fSize == "16")
+            List<Mark> volList = new List<Mark>();
+            
+            //string sql = "SELECT Mark.ID,Mark.Page,Mark.Time,Chapter.Title FROM Mark LEFT JOIN Chapter ON Mark.ChpID=Chapter.ID ORDER BY Time";
+            string sql = "SELECT Mark.ID,Mark.Page,Mark.Time,Chapter.Title FROM Mark LEFT JOIN Chapter ON Mark.ChpID=Chapter.ID ORDER BY Mark.Time DESC";
+            DataSet sdr = DBHelper.Query(sql);
+            if (sdr.Tables.Count<=0)
             {
-                maxTxt = 400;
-            }
-            else if (fSize == "14")
-            {
-                maxTxt = 500;
+                return;
             }
 
-            string sql = "SELECT * FROM Text WHERE ChpID=" + chpID + " ORDER BY No";
-            DataSet sdr = DBHelper.Query(sql);
-            DataRow dr = sdr.Tables[0].Rows[0];
-            string txts = dr["Contents"].ToString();
-            List<string> txtArray = SplitTxt(txts, maxTxt);
-            
-            for (int i = 1; i <= txtArray.Count; i++ )
+            foreach (DataRow dr in sdr.Tables[0].Rows)
             {
-                volList.Add(new Text() { No = i, Contents = txtArray[i-1], BgColor = bgColor, FontSize = fSize });
+                volList.Add(new Mark() { ID = Convert.ToInt32(dr["ID"]), StrPage = "第" + dr["Page"].ToString() + "页", Title = dr["Title"].ToString(), Time = Switch.StampToDateTime(dr["Time"].ToString()).ToString() });
             }
-            this.myBook.ItemsSource = volList;
+            this.myBook.ItemsSource = AdjustOrder(volList);
         }
 
-        private List<string> SplitTxt(string txts, int max) 
+        //将书签按页分
+        private ObservableCollection<MLeaf> AdjustOrder(List<Mark> vl)
         {
-            int len = txts.Length;
-            int no = (int)(Math.Ceiling((double)len / (double)max));
-            List<string> txta = new List<string>();
+            int pag = Convert.ToInt32(Math.Ceiling((Double)vl.Count / 3D));
 
-            for(int i=0; i<no; i++)
+            ObservableCollection<MLeaf> ovs = new ObservableCollection<MLeaf>();
+            int t = 0;
+            for (int i = 0; i < pag; i++)
             {
-                if(i==(no-1))
+                ObservableCollection<Mark> ov = new ObservableCollection<Mark>();//选项数组               
+                for (int j = 0; j < 3; j++)
                 {
-                    txta.Add(txts);
-                    break;
+                    ov.Add(vl[t]);
+                    ++t;
+                    if (t == vl.Count)
+                        break;
                 }
-                txta.Add(txts.Substring(0, max));
-                txts = txts.Remove(0,max);
+                ovs.Add(new MLeaf(i, ov));
             }
-            return txta;
+            return ovs;
+        }
+
+        //按书签跳转
+        private void Url2Conts(object sender, MouseButtonEventArgs e)
+        {
+            TextBlock src = sender as TextBlock;
+            string sql = "SELECT Mark.BokID,Mark.VolID,Mark.ChpID,Mark.Page,Type.Type FROM Mark LEFT JOIN Type ON Mark.BokID=Type.ID WHERE Mark.ID=" + src.Uid;
+            DataSet sdr = DBHelper.Query(sql);
+            if (sdr.Tables.Count <= 0)
+                return;
+            DataRow dr = sdr.Tables[0].Rows[0];
+            Application.Current.Properties["Book"] = dr["BokID"];
+            Application.Current.Properties["Type"] = dr["Type"];
+            Application.Current.Properties["Vol"] = dr["VolID"];
+            Application.Current.Properties["Chp"] = dr["ChpID"];
+            Application.Current.Properties["Page"] = dr["Page"];
+            if (dr["Type"].ToString() == "1" || dr["Type"].ToString() == "3")
+                NavigationService.Navigate(new Uri("Views/Manga.xaml", UriKind.Relative));
+            else if (dr["Type"].ToString() == "2" || dr["Type"].ToString() == "4")
+                NavigationService.Navigate(new Uri("Views/Text.xaml", UriKind.Relative));
         }
 
         private void NextClick(object sender, RoutedEventArgs args)

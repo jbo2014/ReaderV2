@@ -78,24 +78,13 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <!--<Grid>
-                            <Ellipse Opacity="0" Fill="#66FFFFFF" Stroke="{x:Null}" StrokeThickness="0.5" HorizontalAlignment="Stretch" x:Name="ellipse" VerticalAlignment="Stretch"/>
-                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="0,0,0,0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" TextElement.Foreground="#FFFFFFFF" RecognizesAccessKey="True"/>
-                        </Grid>-->
                         <BulletDecorator Background="Transparent" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <Border x:Name="bd2" HorizontalAlignment="Center" Width="40" Height="40" Margin="0">
-                                <!--<Border.OpacityMask>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="Black" Offset="0"/>
-                                        <GradientStop Color="White" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Border.OpacityMask>-->
                                 <ContentPresenter Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             </Border>
                         </BulletDecorator>
                         <ControlTemplate.Triggers>                            
                             <Trigger Property="IsChecked" Value="false">
-                                <!--<Setter Property="Background" Value="{x:Null}" />-->
                                 <Setter TargetName="bd2" Property="Background">
                                     <Setter.Value>
                                         <ImageBrush ImageSource="/ReaderV2;component/Assets/selected0.png"/>
@@ -103,9 +92,38 @@
                                 </Setter>
                             </Trigger>
                             <Trigger Property="IsChecked" Value="true">
-                                <!--<Setter Property="Background" Value="#FF606060" />-->
-                                <!--<Setter TargetName="bd2" Property="Background" Value="Black" />-->
                                 <Setter TargetName="bd2" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="/ReaderV2;component/Assets/selected1.png"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--MakCav样式-->
+        <Style x:Key="MakChk" BasedOn="{x:Null}" TargetType="{x:Type CheckBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <BulletDecorator Background="Transparent" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Border x:Name="bd4" HorizontalAlignment="Center" Width="40" Height="40" Margin="0">
+                                <ContentPresenter Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="false">
+                                <Setter TargetName="bd4" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="/ReaderV2;component/Assets/selected0.png"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="bd4" Property="Background">
                                     <Setter.Value>
                                         <ImageBrush ImageSource="/ReaderV2;component/Assets/selected1.png"/>
                                     </Setter.Value>
@@ -270,14 +288,18 @@
                         <Image Width="30" Visibility="Visible" Source="/ReaderV2;component/Assets/col3.png"/>
                     </RadioButton>
                 </Canvas>
-                <Canvas x:Name="MakCanv" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Height="139" Canvas.Left="510" Canvas.Bottom="65" LostFocus="abc" Loaded="MakLoad">
+                <Canvas x:Name="MakCanv" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Height="139" Canvas.Left="510" Canvas.Bottom="65"> <!--Loaded="MakLoad">-->
                     <Canvas.Background>
                         <ImageBrush ImageSource="/ReaderV2;component/Assets/bg_mark.png" Stretch="Uniform"/>
                     </Canvas.Background>
                     <TextBlock x:Name="MakLab" Text="添加书签" Foreground="White" Canvas.Left="22" Canvas.Top="29"></TextBlock>
-                    <Image x:Name="Mark" Source="/ReaderV2;component/Assets/amark0.png" Canvas.Left="106" Canvas.Top="17" Height="40" Width="39" />
+                    <CheckBox x:Name="Mark" Checked="AddMark" Unchecked="DelMark" Canvas.Left="106" Canvas.Top="17" Height="40" Width="39"  Style="{DynamicResource MakChk}">
+                        <Image Width="20" Source="/ReaderV2;component/Assets/mark.png" />
+                    </CheckBox>
                     <TextBlock Text="书签记录" Foreground="White" Canvas.Left="22" Canvas.Top="83"></TextBlock>
-                    <Image x:Name="Jilu" Source="/ReaderV2;component/Assets/jilu0.png" Canvas.Left="106" Canvas.Top="70" Height="40" Width="39" />
+                    <CheckBox x:Name="Jilu" Checked="Url2Mark" Canvas.Left="106" Canvas.Top="70" Height="40" Width="39"  Style="{DynamicResource MakChk}">
+                        <Image Width="20" Source="/ReaderV2;component/Assets/jilu.png"/>
+                    </CheckBox> 
                 </Canvas>
             </Canvas>
         </Grid>

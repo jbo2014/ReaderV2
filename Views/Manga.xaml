@@ -55,8 +55,8 @@
                             <Border BorderThickness="1" BorderBrush="Gray" Background="White">
                                 <!--<ContentControl Content="{Binding .}" />-->
                                 <Canvas>
-                                        <Image Visibility="Visible" Source="{Binding Path=Img_des}"/>
-                                        <Image Visibility="{Binding Path=ShowMake}" Source="/ReaderV2;component/Assets/Mak.png" Canvas.Left="30" Canvas.Top="0"/>
+                                        <Image Visibility="Visible" Source="{Binding Path=Img_des}" Width="440"/>
+                                        <Image Visibility="{Binding Path=ShowMark}" Source="/ReaderV2;component/Assets/Mak.png" Canvas.Left="30" Canvas.Top="0"/>
                                 </Canvas>
                             </Border>
                         </DataTemplate>

@@ -65,9 +65,17 @@ namespace ReaderV2.Views
             DataRow dr = sdr.Tables[0].Rows[0];
             string txts = dr["Contents"].ToString();
             List<string> txtArray = SplitTxt(txts, maxTxt);
+
+            string shmak = null;
+            
             
             for (int i = 1; i <= txtArray.Count; i++ )
-            {
+            {  
+                //shmak = "Hidden";
+                //if(!string.IsNullOrEmpty(sdr["MkID"].ToString()))
+                //    shmak = "Visible";
+                //else
+                //    shmak = "Hidden";
                 volList.Add(new Text() { No = i, Contents = txtArray[i-1], BgColor = "#"+bgColor, FontSize = fSize });
             }
             this.myBook.ItemsSource = volList;

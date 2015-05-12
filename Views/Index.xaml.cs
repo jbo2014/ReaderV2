@@ -47,39 +47,6 @@ namespace ReaderV2.Views
             }
         }
 
-        //private void ImgLoad(object sender, RoutedEventArgs e)
-        //{
-        //    BitmapImage bitmap = null;
-        //    List<Index> imgList = new List<Index>();
-
-        //    collection = new ImageCollection();
-        //    collection.Location = ConfigurationManager.AppSettings["IndexImg"];
-        //    for (int i = 0; i < collection.Images.Count; i++)
-        //    {
-        //        Index ind = new Index();
-        //        bitmap = this.GetImgSource(collection.Images[i]);
-        //        ind.Img_des = bitmap;
-        //        ind.ID = i;
-        //        ind.Left = 100;
-        //        ind.Top = 700;
-        //        imgList.Add(ind);
-        //    }
-
-        //    this.listImgs.ItemsSource = imgList;
-        //}
-        //private void ImgLoad(object sender, RoutedEventArgs e)
-        //{
-        //    BitmapImage bitmap = null;
-
-        //    collection = new ImageCollection();
-        //    collection.Location = ConfigurationManager.AppSettings["IndexImg"];
-        //    for (int i = 0; i < collection.Images.Count; i++)
-        //    {
-        //        bitmap = this.GetImgSource(collection.Images[i]);
-        //        this.listImgs.Items.Add(new Image() { Source = bitmap, Uid = i.ToString() });
-        //    }
-        //}
-
         private void ImgLoad(object sender, RoutedEventArgs e)
         {
             BitmapImage bitmap = null;

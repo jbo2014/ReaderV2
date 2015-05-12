@@ -50,14 +50,28 @@ namespace ReaderV2.Views
 
             //string bok = Application.Current.Properties["Book"].ToString();
             string chp = Application.Current.Properties["Chp"].ToString();
-            string sql = "SELECT * FROM Manga WHERE ChpID = "+chp+" ORDER BY No";
+            //string sql = "SELECT * FROM Manga WHERE ChpID = "+chp+" ORDER BY No";
+            string sql = "SELECT Manga.ID,Manga.No,Manga.Contents,Mark.ID as MkID FROM Manga LEFT JOIN Mark ON Manga.ChpID=Mark.ChpID AND Manga.No=Mark.Page WHERE Manga.ChpID = " + chp + " ORDER BY No";
             SQLiteDataReader sdr = DBHelper.ExecuteReader(sql);
-            string shmak = "Hidden";
+            string shmak = null;
+            int i = 0;
             while (sdr.Read())
             {
-                volList.Add(new Manga() { ID = Convert.ToInt32(sdr["Id"]), No = Convert.ToInt32(sdr["No"]), Img_des = GetImgSource((byte[])sdr["Contents"]), ShowMake = "Visible" });
+                //if (i % 2 == 0)
+                //    shmak = "Visible";
+                //else
+                //    shmak = "Hidden";
+                if(!string.IsNullOrEmpty(sdr["MkID"].ToString()))
+                    shmak = "Visible";
+                else
+                    shmak = "Hidden";
+                volList.Add(new Manga() { ID = Convert.ToInt32(sdr["Id"]), No = Convert.ToInt32(sdr["No"]), Img_des = GetImgSource((byte[])sdr["Contents"]), ShowMark = shmak });
+                i++;
             }
             this.myBook.ItemsSource = volList;
+            
+            if (Application.Current.Properties["Page"] != null)
+                this.myBook.CurrentSheetIndex = (Convert.ToInt32(Application.Current.Properties["Page"]) - 1) / 2;
         }
 
         public BitmapImage GetImgSource(byte[] codeByte)

@@ -15,6 +15,8 @@ using System.Configuration;
 
 using ReaderV2.Helper;
 using WpfFlipPageControl;
+using ReaderV2.Models;
+using System.Data.SQLite;
 
 namespace ReaderV2.Views.Shared
 {
@@ -36,7 +38,7 @@ namespace ReaderV2.Views.Shared
         {
             if (this.PageType == "TextViewer" || this.PageType == "MangaViewer")
             {
-                MakCanv.Loaded += MakLoad;
+                //MakCanv.Loaded += MakLoad;
 
                 mChp.Checked += OpenChp;
 
@@ -48,6 +50,9 @@ namespace ReaderV2.Views.Shared
 
                 //SdrBar.MouseUp += SdrBar_MouseUp;
                 SdrBar.ValueChanged += JumpPage;
+
+                mSet.Checked += OpenSetSet;
+                mSet.Unchecked += CloseSetSet;
             }
             if (this.PageType == "TextViewer")
             {
@@ -71,18 +76,15 @@ namespace ReaderV2.Views.Shared
         }
 
         //书签面板初始化
-        private void MakLoad(object sender, RoutedEventArgs e)
-        {
-            if (this.PageType == "TextViewer") 
-            {
-                TextViewer tv = (TextViewer)NavigationService.GetNavigationService(this).Content;
-            }
+        //private void MakLoad(object sender, RoutedEventArgs e)
+        //{
+        //    if (this.PageType == "TextViewer") 
+        //    {
+        //        TextViewer tv = (TextViewer)NavigationService.GetNavigationService(this).Content;
+        //    }
 
-            if (this.PageType == "MarkViewer") 
-            {
-                Jilu.Source = new BitmapImage(new Uri("/ReaderV2;component/Assets/jilu1.png", UriKind.Relative));
-            }
-        }
+            
+        //}
 
         //private void OpenMenu(object sender, System.Windows.Input.MouseEventArgs e)
         //{
@@ -119,11 +121,36 @@ namespace ReaderV2.Views.Shared
             this.SetCanv.Visibility = Visibility.Visible;
         }
 
+        //打开书签面板时
         private void OpenMakSet(object sender, RoutedEventArgs e)
         {
             Image img = mMak.Content as Image;
             img.Source = new BitmapImage(new Uri("/ReaderV2;component/Assets/mark1.png", UriKind.Relative));
             this.MakCanv.Visibility = Visibility.Visible;
+
+            if (this.PageType == "MangaViewer")
+            {
+                Manga mga = this.Cb.Items[this.Cb.CurrentSheetIndex * 2] as Manga;
+                if (mga.ShowMark.ToLower() == "visible")
+                {
+                    Mark.IsChecked = true;
+                    MakLab.Text = "删除书签";
+                }
+                else
+                {
+                    Mark.IsChecked = false;
+                    MakLab.Text = "添加书签";
+                }
+            }
+
+            if (this.PageType == "MarkViewer")
+            {
+                Jilu.IsChecked = true;
+            }
+            else
+            {
+                Jilu.IsChecked = false;
+            }
         }
 
         private void CloseProSet(object sender, RoutedEventArgs e)
@@ -248,6 +275,52 @@ namespace ReaderV2.Views.Shared
                 MessageBox.Show("该界面下不允许执行此操作");
             }
         }
+        //跳到书签页
+        private void Url2Mark(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.GetNavigationService(this) != null)
+                NavigationService.GetNavigationService(this).Navigate(new Uri("/Views/Mark.xaml", UriKind.Relative));
+        }
+
+
+
+        /********************************************* 书签项操作 ****************************************/
+        private void AddMark(object sender, RoutedEventArgs e)
+        {
+            bool bol = DBHelper.Exists("SELECT ID FROM Mark WHERE ChpID=" + Application.Current.Properties["Chp"].ToString() + " AND Page=" +(this.Cb.CurrentSheetIndex * 2 + 1));
+            if (bol)
+                return;
+                
+            string sql = "INSERT INTO Mark (BokID,VolID,ChpID,Page,Time) VALUES (@BokID,@VolID,@ChpID,@Page,@Time)";
+            SQLiteParameter[] sps = new SQLiteParameter[]{
+                new SQLiteParameter("BokID", Application.Current.Properties["Book"].ToString()),
+                new SQLiteParameter("VolID", Application.Current.Properties["Vol"].ToString()),
+                new SQLiteParameter("ChpID", Application.Current.Properties["Chp"].ToString()),
+                new SQLiteParameter("Page", this.Cb.CurrentSheetIndex * 2 + 1),
+                new SQLiteParameter("Time", Switch.DateTimeToStamp(DateTime.Now))
+            };
+            DBHelper.ExecuteSql(sql, sps);
+
+            if (this.PageType == "MangaViewer")
+            {
+                Manga mga = this.Cb.Items[this.Cb.CurrentSheetIndex * 2] as Manga;
+                mga.ShowMark = "Visible";
+            }
+            
+        }
+
+        private void DelMark(object sender, RoutedEventArgs e)
+        {
+            string sql = "DELETE FROM Mark WHERE ChpID=" + Application.Current.Properties["Chp"].ToString() + " AND Page=" + (this.Cb.CurrentSheetIndex * 2 + 1);
+            DBHelper.ExecuteSql(sql);
+
+            if (this.PageType == "MangaViewer")
+            {
+                Manga mga = this.Cb.Items[this.Cb.CurrentSheetIndex * 2] as Manga;
+                mga.ShowMark = "Hidden";
+            }
+        }
+
 
 
 

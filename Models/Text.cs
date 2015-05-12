@@ -61,7 +61,13 @@ namespace ReaderV2.Models
         private string contents;
         private string bgColor;
         private string fontSize;
+        private string showMark;
 
+        public string ShowMark
+        {
+            get { return showMark; }
+            set { showMark = value; }
+        }
         public string Contents
         {
             get { return contents; }

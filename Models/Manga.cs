@@ -62,17 +62,17 @@ namespace ReaderV2.Models
 
         #region Extra attributes
         private BitmapImage img_des;
-        private string showMake;
+        private string showMark;
 
         public BitmapImage Img_des
         {
             get { return img_des; }
             set { img_des = value; }
         }
-        public string ShowMake
+        public string ShowMark
         {
-            get { return showMake; }
-            set { showMake = value; }
+            get { return showMark; }
+            set { showMark = value; }
         }
         #endregion Extra attributes
 

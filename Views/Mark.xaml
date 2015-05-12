@@ -10,6 +10,7 @@
              Loaded="MarkLoad"
 	         Width="908" Height="852">
     <Page.Resources>
+        <!--翻页按钮样式-->
         <Style x:Key="MenuButtonStyle" BasedOn="{x:Null}" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -34,6 +35,30 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!--一页书签的listitem-->
+        <Style x:Key="lbiOri" TargetType="{x:Type ListViewItem}">
+            <Style.Resources>
+                <SolidColorBrush Color="Transparent" x:Key="{x:Static SystemColors.HighlightBrushKey}"/>
+                <SolidColorBrush Color="Black" x:Key="{x:Static SystemColors.HighlightTextBrushKey}"/>
+            </Style.Resources>
+        </Style>
+        <!--第一部分:内嵌的ListBox用什么布局-->
+        <ItemsPanelTemplate x:Key="itemspanel">
+            <StackPanel Orientation="Vertical" IsItemsHost="True" Width="360"/>
+        </ItemsPanelTemplate>
+        <!-- 第二部分:内嵌ListBox的项模板-->
+        <DataTemplate x:Key="itemstemplate">
+            <Grid Margin="0,40,0,0" Width="360">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" ></RowDefinition>
+                    <RowDefinition Height="Auto" ></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Uid="{Binding Path=ID}" MouseDown="Url2Conts" Text="{Binding Path=Title}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2,0,10,0" Width="350" Height="34" FontSize="22" Foreground="#716F70"/>
+                <TextBlock Text="{Binding Path=StrPage}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,60,0,0" Height="34" FontSize="18" Foreground="#3D3936"/>
+                <TextBlock Text="{Binding Path=Time}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,60,2,0" Height="34" FontSize="18" Foreground="#3D3936"/>
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
 
     <Grid Focusable="False" x:Name="root">
@@ -49,24 +74,35 @@
         <DockPanel Grid.Row="1">
         <Viewbox>
             <Grid>
-                <controls:CtrlBook x:Name="myBook" Width="880" Height="Auto" Margin="25,4,25,4">                   
+                <controls:CtrlBook x:Name="myBook" Width="880" Height="Auto" Margin="14,4,14,4">                   
                     <controls:CtrlBook.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderThickness="1">
-                                <StackPanel Orientation="Vertical">
+                            <Border>
+                                <!--<WrapPanel Orientation="Vertical">
+                                    <WrapPanel.Background>
+                                        <ImageBrush ImageSource="/ReaderV2;component/Assets/bg_mak.png"/>
+                                    </WrapPanel.Background>
+                                    <Line Stroke="#FF5A181C" StrokeThickness="1.6" StrokeDashArray="2,1" X1="10" Y1="10" X2="80" Y2="10" Margin="42,80,42,0" Height="19"/>
+                                    <TextBlock FontSize="23" Foreground="#66161F" Text="书  签" Margin="54,0,50,0"/>
+                                    <Line Stroke="#FF5A181C" StrokeThickness="1.6" StrokeDashArray="2,1" X1="10" Y1="10" X2="80" Y2="10" Margin="42,0,42,0" Height="19"/>
+                                    <Label MaxWidth="550">
+                                        <TextBlock Uid="{Binding Path=ID}" TextWrapping="Wrap" FontSize="{Binding Path=FontSize}" FontStretch="UltraExpanded" Text="{Binding Path=Title}"/>
+                                    </Label>
+                                </WrapPanel>-->
+
+                                    <StackPanel Orientation="Vertical" Width="440" Margin="0,0,0,0">
                                         <StackPanel.Background>
                                             <ImageBrush ImageSource="/ReaderV2;component/Assets/bg_mak.png"/>
                                         </StackPanel.Background>
-                                        <!--<Image Source="/ReaderV2;component/Assets/bg_mak.png" />-->
-                                        <Line Stroke="#FF5A181C" StrokeThickness="1.6" X1="10" Y1="10" X2="70" Y2="10" Margin="42,-8,50,0" Height="19"/>
-                                        <TextBlock Text="书签"/>
-                                        <Line Stroke="#FF5A181C" StrokeThickness="1.6" X1="10" Y1="10" X2="70" Y2="10" Margin="42,-8,50,0" Height="19"/>
-                                        <!--<ContentControl Content="{Binding .}" />-->
-                                        <Label MaxWidth="550" Background="{Binding Path=BgColor}">
-                                            <TextBlock Uid="{Binding Path=No}" TextWrapping="Wrap" FontSize="{Binding Path=FontSize}" FontStretch="UltraExpanded" Text="{Binding Path=Contents}"/>
-                                        </Label>
-                                </StackPanel>
-                            </Border>
+                                        <Line Stroke="#FF5A181C" StrokeThickness="1.6" StrokeDashArray="3,1" X1="10" Y1="10" X2="80" Y2="10" Margin="60,100,60,0" Height="19"/>
+                                        <TextBlock FontSize="24" Foreground="#66161F" Text="书  签" Margin="70,0,60,0"/>
+                                        <Line Stroke="#FF5A181C" StrokeThickness="1.6" StrokeDashArray="3,1" X1="10" Y1="10" X2="80" Y2="10" Margin="60,0,60,0" Height="19"/>
+                                        <ListView ItemsSource="{Binding Path=VolPage}" BorderThickness="0" Background="Transparent"
+                                        ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                        ItemContainerStyle="{StaticResource lbiOri}" ItemsPanel="{StaticResource itemspanel}" ItemTemplate="{StaticResource itemstemplate}"/>
+                                        <!-- 如果内嵌项不需要单个项选择,可考虑把ListBox换成ItemsControl-->
+                                    </StackPanel>
+                                </Border>
                         </DataTemplate>
                     </controls:CtrlBook.ItemTemplate>
                 </controls:CtrlBook>
