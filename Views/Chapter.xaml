@@ -25,7 +25,7 @@
                 <ListView x:Name="listChp" BorderThickness="0" Background="Transparent">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Uid="{Binding Path=ID}" TextWrapping="Wrap" FontSize="20" Margin="50,10,30,0" Foreground="#555452" MouseLeftButtonDown="Url2Content"><Image Source="/ReaderV2;component/Assets/HB_Chp.png" Width="20"/><Run Text="  "/><Run Text="{Binding Path=Title}"/></TextBlock>
+                            <TextBlock Uid="{Binding Path=ID}" TextWrapping="Wrap" FontSize="14" Margin="50,10,30,0" Foreground="#555452" MouseLeftButtonDown="Url2Content"><Image Source="/ReaderV2;component/Assets/HB_Chp.png" Width="20"/><Run Text="  "/><Run Text="{Binding Path=Title}"/></TextBlock>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

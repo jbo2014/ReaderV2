@@ -100,7 +100,14 @@ namespace ReaderV2.Views.Shared
             Application.Current.Properties["Type"] = "4";
             if (Application.Current.Properties.Contains("Book") && Application.Current.Properties["Book"]!=null)
             {
-                NavigationService.GetNavigationService(this).Navigate(new Uri("/Views/Volume.xaml", UriKind.Relative));
+                if (NavigationService.GetNavigationService(this).Content.GetType().Name == "VolumeViewer")
+                {
+                    NavigationService.GetNavigationService(this).Content = new VolumeViewer();
+                }
+                else
+                {
+                    NavigationService.GetNavigationService(this).Navigate(new Uri("/Views/Volume.xaml", UriKind.Relative));
+                }
             }
             else
             {

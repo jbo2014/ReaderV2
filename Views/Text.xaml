@@ -55,8 +55,8 @@
                             <Border BorderThickness="1" BorderBrush="Gray">
                                 <!--<ContentControl Content="{Binding .}" />-->
                                 <Canvas>
-                                    <Label MaxWidth="550" Background="{Binding Path=BgColor}">
-                                        <TextBlock Uid="{Binding Path=No}" TextWrapping="Wrap" FontSize="{Binding Path=FontSize}" FontStretch="UltraExpanded" Text="{Binding Path=Contents}"/>
+                                    <Label Width="440" Height="780" Background="{Binding Path=BgColor}">
+                                            <TextBlock Uid="{Binding Path=No}" TextWrapping="Wrap" FontFamily="宋体" Width="400" Margin="16,16" LineHeight="38" FontSize="{Binding Path=FontSize}" FontStretch="UltraExpanded" Text="{Binding Path=Contents}"/>
                                     </Label>
                                     <Image Visibility="{Binding Path=ShowMark}" Source="/ReaderV2;component/Assets/Mak.png" Canvas.Left="30" Canvas.Top="0"/>
                                 </Canvas>

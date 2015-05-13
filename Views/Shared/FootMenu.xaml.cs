@@ -36,6 +36,7 @@ namespace ReaderV2.Views.Shared
 
         private void FootLoad(object sender, RoutedEventArgs e)
         {
+            Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             if (this.PageType == "TextViewer" || this.PageType == "MangaViewer")
             {
                 //MakCanv.Loaded += MakLoad;
@@ -48,67 +49,42 @@ namespace ReaderV2.Views.Shared
                 mMak.Checked += OpenMakSet;
                 mMak.Unchecked += CloseMakSet;
 
-                //SdrBar.MouseUp += SdrBar_MouseUp;
                 SdrBar.ValueChanged += JumpPage;
 
                 mSet.Checked += OpenSetSet;
                 mSet.Unchecked += CloseSetSet;
-            }
-            if (this.PageType == "TextViewer")
-            {
+
+                //Text\Manga下允许打开设置面板的翻页设置
                 mSet.Checked += OpenSetSet;
                 mSet.Unchecked += CloseSetSet;
 
-                Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 string turn = cfa.AppSettings.Settings["isTurnPage"].Value;
-                string size = cfa.AppSettings.Settings["fontSize"].Value;
-                string theme = cfa.AppSettings.Settings["theme"].Value;
                 RadioButton rbp = SetCanv.FindName("p" + turn) as RadioButton;
                 rbp.RemoveHandler(RadioButton.CheckedEvent, new RoutedEventHandler(ChangSet));
                 rbp.IsChecked = true;
+                shadeImg.Visibility = Visibility.Visible;
+            }
+            if (this.PageType == "TextViewer")
+            {
+                string size = cfa.AppSettings.Settings["fontSize"].Value;
+                string theme = cfa.AppSettings.Settings["theme"].Value;
+                
                 RadioButton rbs = SetCanv.FindName("f" + size) as RadioButton;
                 rbs.RemoveHandler(RadioButton.CheckedEvent, new RoutedEventHandler(ChangSet));
                 rbs.IsChecked = true;
                 RadioButton rbt = SetCanv.FindName("t" + theme) as RadioButton;
                 rbt.RemoveHandler(RadioButton.CheckedEvent, new RoutedEventHandler(ChangSet));
                 rbt.IsChecked = true;
+                shadeImg.Visibility = Visibility.Hidden;
             }
         }
-
-        //书签面板初始化
-        //private void MakLoad(object sender, RoutedEventArgs e)
-        //{
-        //    if (this.PageType == "TextViewer") 
-        //    {
-        //        TextViewer tv = (TextViewer)NavigationService.GetNavigationService(this).Content;
-        //    }
-
-            
-        //}
-
-        //private void OpenMenu(object sender, System.Windows.Input.MouseEventArgs e)
-        //{
-        //    this.menu.Visibility = Visibility.Visible;
-        //}
 
         private void OpenProSet(object sender, RoutedEventArgs e)
         {
             Image img = mPro.Content as Image;
             img.Source = new BitmapImage(new Uri("/ReaderV2;component/Assets/progress1.png", UriKind.Relative));
             this.ProCanv.Visibility = Visibility.Visible;
-            
-            //if(this.PageType == "TextViewer")
-            //{
-            //    TextViewer Conts = NavigationService.GetNavigationService(this).Content as TextViewer;
-            //    SdrBar.Maximum = Convert.ToDouble(Conts.myBook.GetItemsCount());
-            //    cot.Text = "/" + Conts.myBook.GetItemsCount().ToString();
-            //}
-            //else if (this.PageType == "MangaViewer")
-            //{
-            //    MangaViewer Conts = (MangaViewer)NavigationService.GetNavigationService(this).Content;
-            //    SdrBar.Maximum = Convert.ToDouble(Conts.myBook.GetItemsCount());
-            //    cot.Text = "/" + Conts.myBook.GetItemsCount().ToString();
-            //}
+
             SdrBar.Maximum = Convert.ToDouble(this.Cb.GetItemsCount());
             SdrBar.Value = Convert.ToDouble(this.Cb.CurrentSheetIndex * 2 + 1);
             cot.Text = "/" + this.Cb.GetItemsCount().ToString();
@@ -132,6 +108,20 @@ namespace ReaderV2.Views.Shared
             {
                 Manga mga = this.Cb.Items[this.Cb.CurrentSheetIndex * 2] as Manga;
                 if (mga.ShowMark.ToLower() == "visible")
+                {
+                    Mark.IsChecked = true;
+                    MakLab.Text = "删除书签";
+                }
+                else
+                {
+                    Mark.IsChecked = false;
+                    MakLab.Text = "添加书签";
+                }
+            }
+            else if (this.PageType == "TextViewer") 
+            {
+                Text txt = this.Cb.Items[this.Cb.CurrentSheetIndex * 2] as Text;
+                if (txt.ShowMark.ToLower() == "visible")
                 {
                     Mark.IsChecked = true;
                     MakLab.Text = "删除书签";
@@ -174,40 +164,30 @@ namespace ReaderV2.Views.Shared
             this.MakCanv.Visibility = Visibility.Hidden;
         }
 
-        //private void SdrChange(object sender, RoutedPropertyChangedEventArgs<double> e)
-        //{
-        //    MessageBox.Show("abc");
-        //}
-
         private void OpenChp(object sender, RoutedEventArgs e)
         {
             NavigationService.GetNavigationService(this).Navigate(new Uri("/Views/Chapter.xaml", UriKind.Relative));
         }
 
-        private void SdrChange(object sender, MouseButtonEventArgs e)
-        {
-            MessageBox.Show("abc");
-        }
+        //private void abc(object sender, RoutedEventArgs e)
+        //{
+        //    //App.DoEvents();
 
-        private void abc(object sender, RoutedEventArgs e)
-        {
-            //App.DoEvents();
+        //    if (NavigationService.GetNavigationService(this).Content.GetType().Name == "DeskViewer") 
+        //    {
+        //        Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        //        cfa.AppSettings.Settings["theme"].Value = "#5C5B59";
+        //        cfa.Save(ConfigurationSaveMode.Modified);　　//这个模式的话是将修改的属性写出到配置文件，即使值和继承值相同。
+        //        ConfigurationManager.RefreshSection("appSettings");
 
-            if (NavigationService.GetNavigationService(this).Content.GetType().Name == "DeskViewer") 
-            {
-                Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                cfa.AppSettings.Settings["theme"].Value = "#5C5B59";
-                cfa.Save(ConfigurationSaveMode.Modified);　　//这个模式的话是将修改的属性写出到配置文件，即使值和继承值相同。
-                ConfigurationManager.RefreshSection("appSettings");
-
-                DeskViewer dv = (DeskViewer)NavigationService.GetNavigationService(this).Content;
-                dv.Books.Children.Remove(dv.Books.Children[0]);
-                if (Application.Current.Properties["Type"].ToString() == "2" || Application.Current.Properties["Type"].ToString() == "4")
-                {
-                    dv.Books.Children.Add(new TextViewer());
-                }
-            }
-        }
+        //        DeskViewer dv = (DeskViewer)NavigationService.GetNavigationService(this).Content;
+        //        dv.Books.Children.Remove(dv.Books.Children[0]);
+        //        if (Application.Current.Properties["Type"].ToString() == "2" || Application.Current.Properties["Type"].ToString() == "4")
+        //        {
+        //            dv.Books.Children.Add(new TextViewer());
+        //        }
+        //    }
+        //}
 
 
 
@@ -241,17 +221,6 @@ namespace ReaderV2.Views.Shared
         //slider改变页数
         private void JumpPage(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            //CtrlBook cb = null ;
-            //if (this.PageType == "TextViewer")
-            //{
-            //    TextViewer tv = NavigationService.GetNavigationService(this).Content as TextViewer;
-            //    cb = tv.myBook;
-            //}
-            //else if (this.PageType == "MangaViewer")
-            //{
-            //    MangaViewer mv = NavigationService.GetNavigationService(this).Content as MangaViewer;
-            //    cb = mv.myBook;
-            //}
             this.Cb.CurrentSheetIndex = (Convert.ToInt32(SdrBar.Value)-1)/2;
         }
 
@@ -264,16 +233,18 @@ namespace ReaderV2.Views.Shared
             if (this.PageType == "TextViewer")
             {
                 Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                cfa.AppSettings.Settings[rb.GroupName].Value = rb.Name.Substring(1);
+                //cfa.AppSettings.Settings[rb.GroupName].Value = rb.Name.Substring(1);
+                cfa.AppSettings.Settings.Remove(rb.GroupName);
+                cfa.AppSettings.Settings.Add(rb.GroupName, rb.Name.Substring(1));
                 cfa.Save(ConfigurationSaveMode.Modified);　　//这个模式的话是将修改的属性写出到配置文件，即使值和继承值相同。
                 ConfigurationManager.RefreshSection("appSettings");
 
                 NavigationService.GetNavigationService(this).Content = new TextViewer();
             }
-            else 
-            {
-                MessageBox.Show("该界面下不允许执行此操作");
-            }
+            //else 
+            //{
+            //    MessageBox.Show("该界面下不允许执行此操作");
+            //}
         }
         //跳到书签页
         private void Url2Mark(object sender, RoutedEventArgs e)
@@ -306,6 +277,11 @@ namespace ReaderV2.Views.Shared
                 Manga mga = this.Cb.Items[this.Cb.CurrentSheetIndex * 2] as Manga;
                 mga.ShowMark = "Visible";
             }
+            else if (this.PageType == "TextViewer") 
+            {
+                Text txt = this.Cb.Items[this.Cb.CurrentSheetIndex * 2] as Text;
+                txt.ShowMark = "Visible";
+            }
             
         }
 
@@ -318,6 +294,11 @@ namespace ReaderV2.Views.Shared
             {
                 Manga mga = this.Cb.Items[this.Cb.CurrentSheetIndex * 2] as Manga;
                 mga.ShowMark = "Hidden";
+            }
+            else if (this.PageType == "TextViewer")
+            {
+                Text txt = this.Cb.Items[this.Cb.CurrentSheetIndex * 2] as Text;
+                txt.ShowMark = "Hidden";
             }
         }
 
@@ -354,35 +335,5 @@ namespace ReaderV2.Views.Shared
             }
             set { cb = value; }
         }
-
-        //得到当前页面实例
-        //public Object CurViewer
-        //{
-        //    get {
-        //        if (this.PageType == "TextViewer") 
-        //        {
-        //            curViewer = NavigationService.GetNavigationService(this).Content as TextViewer;
-        //        }
-        //        else if (this.PageType == "MangaViewer")
-        //        {
-        //            curViewer = NavigationService.GetNavigationService(this).Content as MangaViewer;
-        //        }
-        //        return curViewer; 
-        //    }
-        //    set { curViewer = value; }
-        //}
-
-        // 
-        //private void JumpPage(CtrlBook cb, int i)
-        //{
-        //    if (i>0 && cb.CurrentSheetIndex + 1 <= (cb.GetItemsCount() - 1) / 2)
-        //    {
-        //        cb.CurrentSheetIndex += i;
-        //    }
-        //    else if (i<0 && cb.CurrentSheetIndex > 0)
-        //    {
-        //        cb.CurrentSheetIndex -= i;
-        //    }
-        //}
     }
 }

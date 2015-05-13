@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,35 +51,64 @@ namespace ReaderV2.Views
             string fSize = ConfigurationManager.AppSettings["fontSize"];
             string chpID = Application.Current.Properties["Chp"].ToString();
             List<Text> volList = new List<Text>();
-            int maxTxt = 300;
-            if(fSize == "16")
+            int maxTxt = 0;
+            if(fSize == "18")
             {
-                maxTxt = 400;
+                maxTxt = 380;
             }
-            else if (fSize == "14")
+            else if (fSize == "30")
             {
-                maxTxt = 500;
+                maxTxt = 187;
+            }
+            else 
+            {
+                maxTxt = 285;
             }
 
+            //得到文本并进行分页
             string sql = "SELECT * FROM Text WHERE ChpID=" + chpID + " ORDER BY No";
             DataSet sdr = DBHelper.Query(sql);
             DataRow dr = sdr.Tables[0].Rows[0];
             string txts = dr["Contents"].ToString();
             List<string> txtArray = SplitTxt(txts, maxTxt);
 
-            string shmak = null;
-            
-            
-            for (int i = 1; i <= txtArray.Count; i++ )
-            {  
-                //shmak = "Hidden";
-                //if(!string.IsNullOrEmpty(sdr["MkID"].ToString()))
-                //    shmak = "Visible";
-                //else
-                //    shmak = "Hidden";
-                volList.Add(new Text() { No = i, Contents = txtArray[i-1], BgColor = "#"+bgColor, FontSize = fSize });
+            //获取书签
+            sql = "SELECT Page FROM Mark WHERE ChpID=" + chpID;
+            DataSet ds = DBHelper.Query(sql);
+            ArrayList al = null;
+            if (ds.Tables[0].Rows.Count > 0) 
+            {
+                al = new ArrayList();
+                foreach (DataRow dr2 in ds.Tables[0].Rows) 
+                {
+                    al.Add(Convert.ToInt32(dr2["Page"]));
+                }                
+            }
+
+            string shmak = "Hidden";
+            if (al!=null && al.Count > 0)
+            {
+                for (int i = 1; i <= txtArray.Count; i++)
+                {
+                    if (al.Contains(i))
+                        shmak = "Visible";
+                    else
+                        shmak = "Hidden";
+                    volList.Add(new Text() { No = i, Contents = txtArray[i - 1], BgColor = "#" + bgColor, FontSize = fSize, ShowMark = shmak });
+                }
+            }
+            else
+            {
+                for (int i = 1; i <= txtArray.Count; i++)
+                {
+                    volList.Add(new Text() { No = i, Contents = txtArray[i - 1], BgColor = "#" + bgColor, FontSize = fSize, ShowMark = shmak });
+                }
             }
             this.myBook.ItemsSource = volList;
+
+            //由书签跳到该页面指定页数
+            if (Application.Current.Properties["Page"] != null)
+                this.myBook.CurrentSheetIndex = (Convert.ToInt32(Application.Current.Properties["Page"]) - 1) / 2;
         }
 
         private List<string> SplitTxt(string txts, int max) 

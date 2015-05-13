@@ -57,10 +57,6 @@ namespace ReaderV2.Views
             int i = 0;
             while (sdr.Read())
             {
-                //if (i % 2 == 0)
-                //    shmak = "Visible";
-                //else
-                //    shmak = "Hidden";
                 if(!string.IsNullOrEmpty(sdr["MkID"].ToString()))
                     shmak = "Visible";
                 else
@@ -69,7 +65,8 @@ namespace ReaderV2.Views
                 i++;
             }
             this.myBook.ItemsSource = volList;
-            
+
+            //由书签跳到该页面指定页数
             if (Application.Current.Properties["Page"] != null)
                 this.myBook.CurrentSheetIndex = (Convert.ToInt32(Application.Current.Properties["Page"]) - 1) / 2;
         }

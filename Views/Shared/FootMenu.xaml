@@ -258,22 +258,15 @@
                     <Canvas.Background>
                         <ImageBrush ImageSource="/ReaderV2;component/Assets/bg_set.png" Stretch="Uniform"/>
                     </Canvas.Background>
-                    <TextBlock Text="翻页效果" Foreground="White" FontSize="14" Canvas.Left="20" Canvas.Top="28"></TextBlock>
-                    <RadioButton Uid="isTurnPage" Name="p1" Canvas.Left="156" Canvas.Top="16" Style="{DynamicResource SetRBut}" GroupName="isTurnPage" Padding="13,10" Checked="ChangSet">
-                        <TextBlock Text="是" Foreground="White" FontSize="14" />
-                    </RadioButton>
-                    <RadioButton Uid="isTurnPage" Name="p0" Canvas.Left="216" Canvas.Top="16" Style="{DynamicResource SetRBut}" GroupName="isTurnPage" Padding="13,10" Checked="ChangSet">
-                        <TextBlock Text="否" Foreground="White" FontSize="14"></TextBlock>
-                    </RadioButton>
 
                     <TextBlock Text="字体" Foreground="White" FontSize="14" Canvas.Left="20" Canvas.Top="81"></TextBlock>
-                    <RadioButton Name="f18" Canvas.Left="96" Canvas.Top="70" Style="{DynamicResource SetRBut}" GroupName="fontSize" Padding="13,10" Checked="ChangSet">
+                    <RadioButton Name="f30" Canvas.Left="96" Canvas.Top="70" Style="{DynamicResource SetRBut}" GroupName="fontSize" Padding="13,10" Checked="ChangSet">
                         <TextBlock Text="大" Foreground="White" FontSize="14"></TextBlock>
                     </RadioButton>
-                    <RadioButton Name="f16" Canvas.Left="156" Canvas.Top="70" Style="{DynamicResource SetRBut}" GroupName="fontSize" Padding="13,10" Checked="ChangSet">
+                    <RadioButton Name="f22" Canvas.Left="156" Canvas.Top="70" Style="{DynamicResource SetRBut}" GroupName="fontSize" Padding="13,10" Checked="ChangSet">
                         <TextBlock Text="中" Foreground="White" FontSize="14"></TextBlock>
                     </RadioButton>
-                    <RadioButton Name="f14" Canvas.Left="216" Canvas.Top="70" Style="{DynamicResource SetRBut}" GroupName="fontSize" Padding="13,10" Checked="ChangSet">
+                    <RadioButton Name="f18" Canvas.Left="216" Canvas.Top="70" Style="{DynamicResource SetRBut}" GroupName="fontSize" Padding="13,10" Checked="ChangSet">
                         <TextBlock Text="小" Foreground="White" FontSize="14"></TextBlock>
                     </RadioButton>
 
@@ -286,6 +279,16 @@
                     </RadioButton>
                     <RadioButton Name="tBAC4CD" Canvas.Left="216" Canvas.Top="126" Style="{DynamicResource SetRBut}" GroupName="theme" Padding="5,4" Checked="ChangSet">
                         <Image Width="30" Visibility="Visible" Source="/ReaderV2;component/Assets/col3.png"/>
+                    </RadioButton>
+
+                    <Image Name="shadeImg" Width="273" Height="195" Visibility="Visible" Source="/ReaderV2;component/Assets/bg_set.png"/>
+
+                    <TextBlock Text="翻页效果" Foreground="White" FontSize="14" Canvas.Left="20" Canvas.Top="28"></TextBlock>
+                    <RadioButton Uid="isTurnPage" Name="p1" Canvas.Left="156" Canvas.Top="16" Style="{DynamicResource SetRBut}" GroupName="isTurnPage" Padding="13,10" Checked="ChangSet">
+                        <TextBlock Text="是" Foreground="White" FontSize="14" />
+                    </RadioButton>
+                    <RadioButton Uid="isTurnPage" Name="p0" Canvas.Left="216" Canvas.Top="16" Style="{DynamicResource SetRBut}" GroupName="isTurnPage" Padding="13,10" Checked="ChangSet">
+                        <TextBlock Text="否" Foreground="White" FontSize="14"></TextBlock>
                     </RadioButton>
                 </Canvas>
                 <Canvas x:Name="MakCanv" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Height="139" Canvas.Left="510" Canvas.Bottom="65"> <!--Loaded="MakLoad">-->
