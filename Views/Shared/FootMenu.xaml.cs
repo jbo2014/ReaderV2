@@ -230,7 +230,7 @@ namespace ReaderV2.Views.Shared
         private void ChangSet(object sender, RoutedEventArgs e)
         {
             RadioButton rb = e.OriginalSource as RadioButton;
-            if (this.PageType == "TextViewer")
+            if (this.PageType == "TextViewer" || this.PageType == "MangaViewer")
             {
                 Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 //cfa.AppSettings.Settings[rb.GroupName].Value = rb.Name.Substring(1);
@@ -238,13 +238,16 @@ namespace ReaderV2.Views.Shared
                 cfa.AppSettings.Settings.Add(rb.GroupName, rb.Name.Substring(1));
                 cfa.Save(ConfigurationSaveMode.Modified);　　//这个模式的话是将修改的属性写出到配置文件，即使值和继承值相同。
                 ConfigurationManager.RefreshSection("appSettings");
+            }
 
+            if(this.PageType == "TextViewer")
+            {
                 NavigationService.GetNavigationService(this).Content = new TextViewer();
             }
-            //else 
-            //{
-            //    MessageBox.Show("该界面下不允许执行此操作");
-            //}
+            else if (this.PageType == "MangaViewer")
+            {
+                NavigationService.GetNavigationService(this).Content = new MangaViewer();
+            }
         }
         //跳到书签页
         private void Url2Mark(object sender, RoutedEventArgs e)

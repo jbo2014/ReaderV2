@@ -263,6 +263,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="App_Data\ShenJie.db" />
+    <Resource Include="Assets\trends.ttf" />
     <None Include="DB\ShenJie.db" />
   </ItemGroup>
   <ItemGroup>

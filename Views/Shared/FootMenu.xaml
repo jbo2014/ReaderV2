@@ -220,19 +220,19 @@
             <Rectangle Fill="#FF382D2B" Stroke="{x:Null}" StrokeThickness="0.5" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="60"  x:Name="menuBarDown"/>
             <Canvas x:Name="FootCanv">
                 <RadioButton x:Name="mChp" Canvas.Left="60" Canvas.Top="13" Style="{DynamicResource RDOButton}"> <!--Checked="OpenChp">-->
-                    <Image Width="30" Source="/ReaderV2;component/Assets/catalog0.png"/>
+                    <Image Width="37" Source="/ReaderV2;component/Assets/catalog0.png"/>
                 </RadioButton>
-                <RadioButton x:Name="mPro" Canvas.Left="255" Canvas.Top="14" Style="{DynamicResource RDOButton}"> <!--Checked="OpenProSet" Unchecked="CloseProSet">-->
-                    <Image Width="30" Source="/ReaderV2;component/Assets/progress0.png"/>
+                <RadioButton x:Name="mPro" Canvas.Left="255" Canvas.Top="13" Style="{DynamicResource RDOButton}"> <!--Checked="OpenProSet" Unchecked="CloseProSet">-->
+                    <Image Width="37" Source="/ReaderV2;component/Assets/progress0.png"/>
                 </RadioButton>
-                <RadioButton x:Name="mSet" Canvas.Left="440" Canvas.Top="14" Style="{DynamicResource RDOButton}"> <!--Checked="OpenSetSet" Unchecked="CloseSetSet">-->
-                    <Image Width="30" Source="/ReaderV2;component/Assets/setup0.png"/>
+                <RadioButton x:Name="mSet" Canvas.Left="440" Canvas.Top="10" Style="{DynamicResource RDOButton}"> <!--Checked="OpenSetSet" Unchecked="CloseSetSet">-->
+                    <Image Width="37" Source="/ReaderV2;component/Assets/setup0.png"/>
                 </RadioButton>
-                <RadioButton x:Name="mMak" Canvas.Right="255" Canvas.Top="13" Style="{DynamicResource RDOButton}"> <!--Checked="OpenMakSet" Unchecked="CloseMakSet">-->
-                    <Image Width="30" Source="/ReaderV2;component/Assets/mark0.png"/>
+                <RadioButton x:Name="mMak" Canvas.Right="250" Canvas.Top="10" Style="{DynamicResource RDOButton}"> <!--Checked="OpenMakSet" Unchecked="CloseMakSet">-->
+                    <Image Width="37" Source="/ReaderV2;component/Assets/mark0.png"/>
                 </RadioButton>
                 <RadioButton x:Name="mNet" Canvas.Right="60" Canvas.Top="12" Style="{DynamicResource RDOButton}">
-                    <Image Width="38" Source="/ReaderV2;component/Assets/netarea0.png"/>
+                    <Image Width="40" Source="/ReaderV2;component/Assets/netarea0.png"/>
                 </RadioButton>
 
                 <Canvas x:Name="ProCanv" Visibility="Hidden" HorizontalAlignment="Left" Height="96" VerticalAlignment="Top" Width="427" Canvas.Left="28" Canvas.Bottom="65" >

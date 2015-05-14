@@ -8,6 +8,7 @@
              d:DesignHeight="50" d:DesignWidth="908">
 
     <UserControl.Resources>
+        <FontFamily x:Key="SSZHBrush">/ReaderV2;component/Assets/#时尚中黑简体</FontFamily>
         <Style x:Key="MenuButtonStyle" BasedOn="{x:Null}" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -51,8 +52,8 @@
             <!--<Image Width="535" Visibility="Visible" Source="..\..\Assets\BigTitle.png" HorizontalAlignment="Center" Height="39" PreviewMouseDown="RemoveWin"/>-->
             <!--<TextBlock x:Name="Title" Text="abcdefdsfsdfdsf" Width="535" Height="39" Visibility="Visible" HorizontalAlignment="Center" PreviewMouseDown="RemoveWin" Foreground="White"></TextBlock>-->
 
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Microsoft YaHei" PreviewMouseDown="RemoveWin">
-                <Run x:Name="Title" Foreground="White" FontWeight="Normal" FontSize="27" Text="神界漫画《四大名著》数字全集"/>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource SSZHBrush}" PreviewMouseDown="RemoveWin">
+                <Run x:Name="Title" Foreground="White" FontWeight="Normal" FontSize="28" Text="神 界 漫 画 《 四 大 名 著 》 数 字 全 集"/>
             </TextBlock>
         </DockPanel>
     </Grid>

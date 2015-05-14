@@ -150,7 +150,7 @@
             </ListView>
         </Canvas>
         <Canvas x:Name="Aspect">
-            <Image x:Name="yLeft" Width="45" Source="..\Assets\Up.png" HorizontalAlignment="Right" MouseLeftButtonDown="PageUp" Canvas.Right="90" Canvas.Bottom="80" />
+            <Image x:Name="yLeft" Visibility="Hidden" Width="45" Source="..\Assets\Up.png" HorizontalAlignment="Right" MouseLeftButtonDown="PageUp" Canvas.Right="90" Canvas.Bottom="80" />
             <Image x:Name="yRight" Width="45" Source="..\Assets\Down.png" HorizontalAlignment="Right" MouseLeftButtonDown="PageDown" Canvas.Right="30" Canvas.Bottom="80" />
         </Canvas>
         <my:TopMenu x:Name="Top" Grid.Row="0"/>

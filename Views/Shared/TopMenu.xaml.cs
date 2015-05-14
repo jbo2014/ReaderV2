@@ -37,16 +37,30 @@ namespace ReaderV2.Views.Shared
                 string tit = DBHelper.GetSingle("select b.Title from book as b left join Type as t on b.id=t.bokid where t.id="+Bok).ToString();
 
                 Dictionary<string, string> Tys = new Dictionary<string,string>();
-                Tys.Add("1","漫画");
-                Tys.Add("2","原著小说");
-                Tys.Add("3","少年绘本");
-                Tys.Add("4","百科");
-                this.Title.Text = "神界《" + tit + "》" + Tys[Typ];
+                Tys.Add("1"," 漫 画");
+                Tys.Add("2"," 原 著 小 说");
+                Tys.Add("3"," 少 年 绘 本");
+                Tys.Add("4"," 百 科");
+                this.Title.Text = "神 界 《 " + StrInstSpace(tit, " ") + " 》" + Tys[Typ];
             }
             else
             {
-                this.Title.Text = "神界漫画《四大名著》数字全集";
+                this.Title.Text = "神 界 漫 画 《 四 大 名 著 》 数 字 全 集";
             }
+        }
+
+        private string StrInstSpace(string str, string spa) 
+        {
+            string tmp = str;
+            int lsp = spa.Length;
+            int lst = str.Length;
+            int i = 1;
+            while (i < lst + (lst - 1) * lsp) 
+            {
+                tmp = tmp.Insert(i, spa);
+                i += lsp + 1;
+            }
+            return tmp;
         }
 
         private void RemoveWin(object sender, System.Windows.Input.MouseButtonEventArgs e)

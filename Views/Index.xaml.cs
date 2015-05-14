@@ -114,7 +114,12 @@ namespace ReaderV2.Views
         {
             if (e.ClickCount > 1)
                 return;
-            int rows = 4;
+            int rows = 6;
+            //判断是否要查看的是百科
+            if (Application.Current.Properties["Type"] != null && Application.Current.Properties["Type"].ToString() == "4")
+            {
+                rows = 2;
+            }
             Double dy0 = 88D;
             Double range = 750D;
             Double dy = Books.TransformToAncestor(this).Transform(new Point(0, 0)).Y;
