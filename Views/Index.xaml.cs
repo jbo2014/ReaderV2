@@ -69,16 +69,16 @@ namespace ReaderV2.Views
                     Index ind0 = new Index();
                     bitmap = this.GetImgSource(ii + "T" + sdr["Type"].ToString() + "_Title.png");
                     ind0.Img_des = bitmap;
-                    ind0.Margin = new Thickness(40,20,40,40);
-                    ind0.Width = 400;
+                    ind0.Margin = new Thickness(40,16,40,10);
+                    ind0.Width = 410;
                     imgList.Add(ind0);
                 }
                 Index ind = new Index();
                 bitmap = this.GetImgSource(ii + sdr["Img"].ToString() + ".png");
                 ind.Img_des = bitmap;
                 ind.ID = Convert.ToInt32(sdr["ID"]);
-                ind.Width = 340;
-                ind.Margin = new Thickness(40,40,40,100);
+                ind.Width = 352;
+                ind.Margin = new Thickness(35,20,35,100);
                 ind.Type = Convert.ToInt32(sdr["Type"]);
                 imgList.Add(ind);
                 i++;
@@ -121,7 +121,7 @@ namespace ReaderV2.Views
                 rows = 2;
             }
             Double dy0 = 88D;
-            Double range = 750D;
+            Double range = 740D;
             Double dy = Books.TransformToAncestor(this).Transform(new Point(0, 0)).Y;
             if (dy > (rows - 1) * -range + dy0)
             {
@@ -160,7 +160,7 @@ namespace ReaderV2.Views
             if (e.ClickCount > 1)
                 return;
             Double dy0 = 88D;
-            Double range = 750D;
+            Double range = 740D;
             Double dy = Books.TransformToAncestor(this).Transform(new Point(0, 0)).Y;
             if (dy < dy0) //Books正常下滑
             {

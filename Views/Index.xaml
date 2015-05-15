@@ -123,7 +123,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
         </Grid>
-        <Canvas x:Name="Books" Margin="27,88,21,156" Width="860" Grid.Row="1" Loaded="ImgLoad">
+        <Canvas x:Name="Books" Margin="10,88,10,90" Width="860" Grid.Row="1" Loaded="ImgLoad">
             <Canvas.RenderTransform>
                 <TranslateTransform x:Name="tt" X="0" Y="0"/>
             </Canvas.RenderTransform>

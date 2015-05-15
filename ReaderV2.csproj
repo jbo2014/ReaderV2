@@ -404,4 +404,26 @@
   <ItemGroup>
     <Resource Include="Assets\bg_mak.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Index\0F38E413-7CC6-4640-1842-8BAF2C4CF715.png" />
+    <Resource Include="Assets\Index\1061C1D5-D274-A198-7FA4-DCECDEF27B30.png" />
+    <Resource Include="Assets\Index\1A18D2AC-DB82-5E3F-F575-D6A082B4E2D1.png" />
+    <Resource Include="Assets\Index\3476146F-3021-B9CD-F152-96C775E6B64F.png" />
+    <Resource Include="Assets\Index\38F1B21A-B2D5-8CF3-339D-423D32687157.png" />
+    <Resource Include="Assets\Index\3BA37604-DE1F-5237-9ABE-8842C2EEFBBF.png" />
+    <Resource Include="Assets\Index\4D32406C-4BA5-B09E-7320-AEC416523351.png" />
+    <Resource Include="Assets\Index\55ECAE8C-A638-3282-B405-C60A4C4079FB.png" />
+    <Resource Include="Assets\Index\610ECD97-BB95-9095-11A1-C0F4EC1E2467.png" />
+    <Resource Include="Assets\Index\67428BEA-7D61-D299-BCA9-C6FC9C2E2CEF.png" />
+    <Resource Include="Assets\Index\8B3F74AE-DD12-5042-0B9C-BB1C57A7873C.png" />
+    <Resource Include="Assets\Index\926460DC-EECD-0B29-4351-15E0B8C548AA.png" />
+    <Resource Include="Assets\Index\9BE5BF99-9B0E-EF27-DDD7-A49A59A2FCE4.png" />
+    <Resource Include="Assets\Index\E21F2F02-FD11-B6A9-3EAB-E1BA3197D6FC.png" />
+    <Resource Include="Assets\Index\E7E03CAB-1345-3657-28AF-642531177D6F.png" />
+    <Resource Include="Assets\Index\F08C0EA9-C4CB-5BB0-BBC3-5F711C36FD75.png" />
+    <Resource Include="Assets\Index\T1_Title.png" />
+    <Resource Include="Assets\Index\T2_Title.png" />
+    <Resource Include="Assets\Index\T3_Title.png" />
+    <Resource Include="Assets\Index\T4_Title.png" />
+  </ItemGroup>
 </Project>

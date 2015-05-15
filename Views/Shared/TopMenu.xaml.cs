@@ -125,7 +125,8 @@ namespace ReaderV2.Views.Shared
             }
             else
             {
-                NavigationService.GetNavigationService(this).Navigate(new Uri("/Views/Index.xaml", UriKind.Relative));
+                //NavigationService.GetNavigationService(this).Navigate(new Uri("/Views/Index.xaml", UriKind.Relative));
+                NavigationService.GetNavigationService(this).Content = new IndexViewer();
             }
         }
 
