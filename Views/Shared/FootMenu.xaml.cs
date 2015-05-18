@@ -279,11 +279,17 @@ namespace ReaderV2.Views.Shared
             {
                 Manga mga = this.Cb.Items[this.Cb.CurrentSheetIndex * 2] as Manga;
                 mga.ShowMark = "Visible";
+
+                MangaViewer tv = NavigationService.GetNavigationService(this).Content as MangaViewer;
+                tv.xMark.Visibility = Visibility.Visible;
             }
             else if (this.PageType == "TextViewer") 
             {
                 Text txt = this.Cb.Items[this.Cb.CurrentSheetIndex * 2] as Text;
                 txt.ShowMark = "Visible";
+
+                TextViewer tv = NavigationService.GetNavigationService(this).Content as TextViewer;
+                tv.xMark.Visibility = Visibility.Visible;
             }
             
         }

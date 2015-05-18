@@ -111,6 +111,14 @@ namespace ReaderV2.Views.Shared
         //直接跳到百科
         private void Fly2Wiki(object sender, MouseButtonEventArgs e)
         {
+            //目录页不跳转到百科
+            if (NavigationService.GetNavigationService(this).Content.GetType().Name == "ChapterViewer" && (Application.Current.Properties["Type"]!=null && Application.Current.Properties["Type"]=="4"))
+            {
+                ChapterViewer cv = NavigationService.GetNavigationService(this).Content as ChapterViewer;
+                cv.searchBar.Visibility = Visibility.Visible;
+                return;
+            }
+
             Application.Current.Properties["Type"] = "4";
             if (Application.Current.Properties.Contains("Book") && Application.Current.Properties["Book"]!=null)
             {

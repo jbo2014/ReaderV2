@@ -89,27 +89,43 @@ namespace ReaderV2.Views
 
         private void NextClick(object sender, RoutedEventArgs args)
         {
-            //if (this.myBook.CurrentSheetIndex < this.myBook.GetItemsCount() / 2)
             if (this.myBook.CurrentSheetIndex + 1 <= (this.myBook.GetItemsCount() - 1) / 2)
                 this.myBook.CurrentSheetIndex++;
+            CloseFootMenu();
         }
 
         private void PreviousClick(object sender, RoutedEventArgs args)
         {
             if (this.myBook.CurrentSheetIndex > 0)
                 this.myBook.CurrentSheetIndex--;
+            CloseFootMenu();
         }
 
         private void AutoNextClick(object sender, RoutedEventArgs e)
         {
             this.myBook.AnimateToNextPage(false, 700);
             this.myBook.Focus();
+            CloseFootMenu();
         }
 
         private void AutoPreviousClick(object sender, RoutedEventArgs e)
         {
             this.myBook.AnimateToPreviousPage(false, 700);
             this.myBook.Focus();
+            CloseFootMenu();
+        }
+
+
+        //点击隐藏左上角书签图标，关闭foot所有弹出菜单
+        private void CloseFootMenu()
+        {
+            xMark.Visibility = Visibility.Hidden;
+            if (this.Content != null)
+            {
+                Foot.mPro.IsChecked = false;
+                Foot.mSet.IsChecked = false;
+                Foot.mMak.IsChecked = false;
+            }
         }
     }
 }

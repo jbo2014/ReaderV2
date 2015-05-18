@@ -28,6 +28,11 @@ namespace ReaderV2.Views
             InitializeComponent();
             this.Background = Brushes.White;
 
+            if (Application.Current.Properties["Type"].ToString() == "2" || Application.Current.Properties["Type"].ToString() == "4")
+                ListImg.Source = new BitmapImage(new Uri("/ReaderV2;component/Assets/bg_mak.png", UriKind.Relative));                
+            else
+                ListImg.Source = new BitmapImage(new Uri("/ReaderV2;component/Assets/bg_catalog.png", UriKind.Relative));
+
             Image img = this.Foot.mChp.Content as Image;
             img.Source = new BitmapImage(new Uri("/ReaderV2;component/Assets/catalog1.png", UriKind.Relative));
         }
@@ -65,6 +70,11 @@ namespace ReaderV2.Views
             {
                 NavigationService.Navigate(new Uri("Views/Text.xaml", UriKind.Relative));
             }
+        }
+
+        private void SearchChp(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

@@ -56,12 +56,14 @@
                                 <!--<ContentControl Content="{Binding .}" />-->
                                 <Canvas>
                                         <Image Visibility="Visible" Source="{Binding Path=Img_des}" Width="440"/>
-                                        <Image Visibility="{Binding Path=ShowMark}" Source="/ReaderV2;component/Assets/Mak.png" Canvas.Left="30" Canvas.Top="0"/>
+                                        <Image Visibility="{Binding Path=ShowMark}" Source="/ReaderV2;component/Assets/Mak.png" Canvas.Left="30" Canvas.Top="0" Width="20"/>
                                 </Canvas>
                             </Border>
                         </DataTemplate>
                     </controls:CtrlBook.ItemTemplate>
-                </controls:CtrlBook>
+                    </controls:CtrlBook>
+
+                <Image Name="xMark" Visibility="Hidden" Source="/ReaderV2;component/Assets/Mak.png" Canvas.Left="30" Canvas.Top="0" Width="20" Height="49" Margin="56,5,854,733"/>
                 <Button x:Name="prevBut" Style="{DynamicResource MenuButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" 
                 	VerticalContentAlignment="Center" Background="Transparent" Margin="-12,373,0,374">
                         <Image Width="40" Height="40" Visibility="Visible" Source="/ReaderV2;component/Assets/Left.png" HorizontalAlignment="left"/>

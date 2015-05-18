@@ -16,10 +16,11 @@
         <Rectangle Fill="#45393b" Stroke="{x:Null}" StrokeThickness="0.5" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="49"  x:Name="menuBar"/>
         <Canvas x:Name="Books" Margin="30,54,30,65" Loaded="ImgLoaded">
             <Image x:Name="ChpImg" Height="733" Canvas.Left="14"/>
+            <Image Name="ListImg" Margin="0" Height="733" Canvas.Right="14"/>
             <StackPanel Canvas.Right="14" Height="733" Width="420">
-                <StackPanel.Background>
+                <!--<StackPanel.Background>
                     <ImageBrush ImageSource="/ReaderV2;component/Assets/bg_catalog.png" />
-                </StackPanel.Background>
+                </StackPanel.Background>-->                
                 <TextBlock FontSize="24" Foreground="#FF841B1F" Margin="50,60,50,0"><Run Text="目  录"/></TextBlock>
                 <Line Stroke="#FF5A181C" StrokeThickness="1.6" X1="10" Y1="10" X2="70" Y2="10" Margin="42,-8,50,0" Height="19"/>
                 <ListView x:Name="listChp" BorderThickness="0" Background="Transparent">
@@ -30,6 +31,11 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </StackPanel>
+        </Canvas>
+        <Canvas Name="searchBar" Visibility="Hidden" Margin="427,0,-427,0">
+            <Image Source="/ReaderV2;component/Assets/bg_searchBar.png" Width="200" Canvas.Left="210" Canvas.Top="70"/>
+            <Image Source="/ReaderV2;component/Assets/bt_search.png" Width="16" Canvas.Left="380" Canvas.Top="75" MouseDown="SearchChp"/>
+            <TextBox Height="20" Name="txtSearch" Width="150" Background="Transparent" BorderThickness="0" FontSize="16" Canvas.Left="221" Canvas.Top="74"/>
         </Canvas>
         <my:FootMenu x:Name="Foot" />
     </Grid>

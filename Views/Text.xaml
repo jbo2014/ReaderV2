@@ -56,14 +56,16 @@
                                 <!--<ContentControl Content="{Binding .}" />-->
                                 <Canvas>
                                     <Label Width="440" Height="780" Background="{Binding Path=BgColor}">
-                                            <TextBlock Uid="{Binding Path=No}" TextWrapping="Wrap" FontFamily="宋体" Width="400" Margin="16,16" LineHeight="38" FontSize="{Binding Path=FontSize}" FontStretch="UltraExpanded" Text="{Binding Path=Contents}"/>
+                                            <TextBlock Uid="{Binding Path=No}" TextWrapping="Wrap" FontFamily="宋体" Foreground="{Binding Path=FontColor}" Width="400" Margin="16,16" LineHeight="38" FontSize="{Binding Path=FontSize}" FontStretch="UltraExpanded" Text="{Binding Path=Contents}"/>
                                     </Label>
-                                    <Image Visibility="{Binding Path=ShowMark}" Source="/ReaderV2;component/Assets/Mak.png" Canvas.Left="30" Canvas.Top="0"/>
+                                        <Image Visibility="{Binding Path=ShowMark}" Source="/ReaderV2;component/Assets/Mak.png" Canvas.Left="30" Canvas.Top="0" Width="20"/>
                                 </Canvas>
                             </Border>
                         </DataTemplate>
                     </controls:CtrlBook.ItemTemplate>
                 </controls:CtrlBook>
+                
+                <Image Name="xMark" Visibility="Hidden" Source="/ReaderV2;component/Assets/Mak.png" Canvas.Left="30" Canvas.Top="0" Width="20" Height="49" Margin="56,5,854,733"/>
                 <Button x:Name="prevBut" Style="{DynamicResource MenuButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" 
                 	VerticalContentAlignment="Center" Background="Transparent" Margin="-12,373,0,374">
                         <Image Width="40" Height="40" Visibility="Visible" Source="/ReaderV2;component/Assets/Left.png" HorizontalAlignment="left"/>

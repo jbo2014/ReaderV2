@@ -85,6 +85,13 @@ namespace ReaderV2.Views
                 }                
             }
 
+            //设置文本颜色
+            string fcolor = "Black";
+            if (bgColor == "6E6E6E")
+                fcolor = "White";
+            else
+                fcolor = "Black";
+
             string shmak = "Hidden";
             if (al!=null && al.Count > 0)
             {
@@ -94,14 +101,15 @@ namespace ReaderV2.Views
                         shmak = "Visible";
                     else
                         shmak = "Hidden";
-                    volList.Add(new Text() { No = i, Contents = txtArray[i - 1], BgColor = "#" + bgColor, FontSize = fSize, ShowMark = shmak });
+
+                    volList.Add(new Text() { No = i, Contents = txtArray[i - 1], BgColor = "#" + bgColor, FontSize = fSize, FontColor = fcolor, ShowMark = shmak });
                 }
             }
             else
             {
                 for (int i = 1; i <= txtArray.Count; i++)
                 {
-                    volList.Add(new Text() { No = i, Contents = txtArray[i - 1], BgColor = "#" + bgColor, FontSize = fSize, ShowMark = shmak });
+                    volList.Add(new Text() { No = i, Contents = txtArray[i - 1], BgColor = "#" + bgColor, FontSize = fSize, FontColor = fcolor, ShowMark = shmak });
                 }
             }
             this.myBook.ItemsSource = volList;
@@ -134,23 +142,40 @@ namespace ReaderV2.Views
         {
             if (this.myBook.CurrentSheetIndex < this.myBook.GetItemsCount() / 2)
                 this.myBook.CurrentSheetIndex++;
+            CloseFootMenu();
         }
         private void PreviousClick(object sender, RoutedEventArgs args)
         {
             if (this.myBook.CurrentSheetIndex > 0)
                 this.myBook.CurrentSheetIndex--;
+            CloseFootMenu();
         }
 
         private void AutoNextClick(object sender, RoutedEventArgs e)
         {
             this.myBook.AnimateToNextPage(false, 700);
             this.myBook.Focus();
+            CloseFootMenu();
         }
 
         private void AutoPreviousClick(object sender, RoutedEventArgs e)
         {
             this.myBook.AnimateToPreviousPage(false, 700);
             this.myBook.Focus();
+            CloseFootMenu();
+        }
+
+
+        //点击隐藏左上角书签图标，关闭foot所有弹出菜单
+        private void CloseFootMenu()
+        {
+            xMark.Visibility = Visibility.Hidden;
+            if (this.Content != null)
+            {
+                Foot.mPro.IsChecked = false;
+                Foot.mSet.IsChecked = false;
+                Foot.mMak.IsChecked = false;
+            }
         }
     }
 }

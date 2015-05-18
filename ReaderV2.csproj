@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Helper\DbHelper.cs" />
     <Compile Include="Helper\Encrypt.cs" />
+    <Compile Include="Helper\Common.cs" />
     <Compile Include="Helper\Switch.cs" />
     <Compile Include="Models\Chapter.cs" />
     <Compile Include="Models\Manga.cs" />
@@ -173,6 +174,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\WpfFlipPageControl.dll</HintPath>
     </Reference>
+    <Resource Include="Assets\bg_catalog.png" />
+    <Resource Include="Assets\bg_mak.png" />
     <Resource Include="Assets\bg_progress.png" />
     <Resource Include="Assets\shadowPageLeft.png" />
     <Resource Include="Assets\shadowPageRight.png" />
@@ -267,11 +270,7 @@
     <None Include="DB\ShenJie.db" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Assets\bg_12.png" />
-    <Resource Include="Assets\bg_catalog.png" />
     <Resource Include="Assets\catalog1.png" />
     <Resource Include="Assets\Cover1_sgyy.png" />
     <Resource Include="Assets\Cover1_xyj.png" />
@@ -402,9 +401,6 @@
     <Resource Include="Assets\procr.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\bg_mak.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Assets\Index\0F38E413-7CC6-4640-1842-8BAF2C4CF715.png" />
     <Resource Include="Assets\Index\1061C1D5-D274-A198-7FA4-DCECDEF27B30.png" />
     <Resource Include="Assets\Index\1A18D2AC-DB82-5E3F-F575-D6A082B4E2D1.png" />
@@ -425,5 +421,11 @@
     <Resource Include="Assets\Index\T2_Title.png" />
     <Resource Include="Assets\Index\T3_Title.png" />
     <Resource Include="Assets\Index\T4_Title.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\bg_searchBar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\bt_search.png" />
   </ItemGroup>
 </Project>

@@ -11,6 +11,7 @@ namespace ReaderV2.Helper
 {
     class Switch
     {
+        /*************************************************************************  图片与字节流间的转换  ******************************************************************/
         /// <summary>
         /// 图片转换成字节流
         /// </summary>
@@ -54,7 +55,7 @@ namespace ReaderV2.Helper
 
 
 
-
+        /*************************************************************************  DateTime与UTC间的转换  ******************************************************************/
         // 时间戳转为C#格式时间
         public static DateTime StampToDateTime(string timeStamp)
         {
@@ -71,5 +72,8 @@ namespace ReaderV2.Helper
             System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
             return (int)(time - startTime).TotalSeconds;
         }
+
+
+
     }
 }
